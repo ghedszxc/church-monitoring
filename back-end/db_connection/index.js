@@ -6,4 +6,8 @@ const connection = mysql.createConnection({
     database: 'bocaue_masterlist'
 });
 
+// connection.connect(function(err) {
+//     if (err) throw err
+// });
+
 module.exports = connection;
