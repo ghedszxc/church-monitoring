@@ -232,9 +232,7 @@ const discipleList = ref([])
 
 onMounted(async () => {
     const res = await Api.getDiscipleList()
-
     discipleList.value = res.data
-
 })
 
 function getAge(payload) {

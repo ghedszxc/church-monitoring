@@ -52,6 +52,15 @@
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12">
+                                <v-text-field
+                                    v-model="form.contactNo"
+                                    label="Contact No."
+                                    hide-details
+                                    density="compact"
+                                    variant="outlined"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" md="6">
                                 <v-select
                                     v-model="form.network"
                                     label="Network"
@@ -62,7 +71,7 @@
                                 ></v-select>
                                 <!-- :rules="[v => !!v || 'Item is required']" -->
                             </v-col>
-                            <v-col cols="12">
+                            <v-col cols="12" md="6">
                                 <v-select
                                     v-model="form.status"
                                     label="Status"
@@ -72,15 +81,6 @@
                                     variant="outlined"
                                 ></v-select>
                                 <!-- :rules="[v => !!v || 'Item is required']" -->
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field
-                                    v-model="form.contactNo"
-                                    label="Contact No."
-                                    hide-details
-                                    density="compact"
-                                    variant="outlined"
-                                ></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-date-input
@@ -112,7 +112,7 @@
                         color="primary"
                         variant="flat"
                         block
-                        @click="validate">
+                        @click="onSubmit()">
                         Submit
                     </v-btn>
                 </v-card-actions>
@@ -123,6 +123,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import Api from '@/services/api'
 
 const addDialog = ref(false)
 
@@ -136,6 +137,16 @@ const form = ref({
     birthdate: new Date()
 })
 
+// const form = {
+//     surname: null,
+//     givenName: null,
+//     middleName: null,
+//     network: null,
+//     status: null,
+//     contactNo: null,
+//     birthdate: new Date()
+// }
+
 const statusList = ref([
     '1T', '2T', '3T', '4T', '5T',
     '6T', '7T', '8T', '9T', '10T',
@@ -146,10 +157,13 @@ const networkList = ref([
     'W', 'YM', 'M', 'YM'
 ])
 
-async function validate () {
-    const { valid } = await this.$refs.form.validate()
+async function onSubmit() {
+    const res = await Api.registerDisciple(form)
+    // const { valid } = await this.$refs.form.validate()
 
-    if (valid) alert('Form is valid')
+
+    console.log(res.data)
+    // if (valid) alert('Form is valid')
 }
 
 async function reset () {

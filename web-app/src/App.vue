@@ -8,10 +8,10 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-import router from '@/router'
+// import { onMounted } from 'vue'
+// import router from '@/router'
 
-onMounted(() => {
-  console.log('router', router.currentRoute.value)
-})
+// onMounted(() => {
+//   console.log('router', router.currentRoute.value)
+// })
 </script>
