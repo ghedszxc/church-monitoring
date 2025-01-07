@@ -121,60 +121,62 @@
     </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script>
 import Api from '@/services/api'
 
-const addDialog = ref(false)
+export default {
+    data:() => ({
+        addDialog: false,
+        form: {
+            surname: null,
+            givenName: null,
+            middleName: null,
+            network: null,
+            status: null,
+            contactNo: null,
+            birthdate: new Date()
+        },
 
-const form = ref({
-    surname: null,
-    givenName: null,
-    middleName: null,
-    network: null,
-    status: null,
-    contactNo: null,
-    birthdate: new Date()
-})
+        statusList: [
+            '1T', '2T', '3T', '4T', '5T',
+            '6T', '7T', '8T', '9T', '10T',
+            'RD'
+        ],
 
-// const form = {
-//     surname: null,
-//     givenName: null,
-//     middleName: null,
-//     network: null,
-//     status: null,
-//     contactNo: null,
-//     birthdate: new Date()
+        networkList: [
+            'W', 'YM', 'M', 'YM'
+        ],
+    }),
+    methods: {
+        async onSubmit() {
+            Api.registerDisciple(this.form).then(() => {
+                this.$refs.form.reset()
+                this.addDialog = false
+            })
+        },
+        async onSelectDate() {
+            console.log(this.form.birthdate)
+        }
+    }
+}
+// async function onSubmit() {
+//     const res = await Api.registerDisciple(form)
+//     // const { valid } = await this.$refs.form.validate()
+
+
+//     console.log(res.data)
+//     // if (valid) alert('Form is valid')
 // }
 
-const statusList = ref([
-    '1T', '2T', '3T', '4T', '5T',
-    '6T', '7T', '8T', '9T', '10T',
-    'RD'
-])
+// async function reset () {
+//     this.$refs.form.reset()
+// }
 
-const networkList = ref([
-    'W', 'YM', 'M', 'YM'
-])
+// async function resetValidation () {
+//     this.$refs.form.resetValidation()
+// }
 
-async function onSubmit() {
-    const res = await Api.registerDisciple(form)
-    // const { valid } = await this.$refs.form.validate()
-
-
-    console.log(res.data)
-    // if (valid) alert('Form is valid')
-}
-
-async function reset () {
-    this.$refs.form.reset()
-}
-
-async function resetValidation () {
-    this.$refs.form.resetValidation()
-}
-
-async function onSelectDate() {
-    console.log(form.value)
-}
+// async function onSelectDate() {
+//     console.log(form.value)
+// }
 </script>
