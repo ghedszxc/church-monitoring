@@ -17,15 +17,20 @@
                     </v-btn>
                     Register
                 </v-toolbar>
-                <v-card-text>
+                <v-card-text style="height: 50vh; overflow-y: auto;">
                     <v-form ref="form">
                         <v-row>
+                            <v-col cols="12">
+                                <span class="text-overline">General Info</span>
+                                <v-divider></v-divider>
+                            </v-col>
                             <v-col cols="12">
                                 <v-text-field
                                     v-model="form.surname"
                                     label="Surname"
                                     hide-details
                                     density="compact"
+                                    variant="outlined"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12">
@@ -34,6 +39,7 @@
                                     label="Given Name"
                                     hide-details
                                     density="compact"
+                                    variant="outlined"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12">
@@ -42,6 +48,7 @@
                                     label="Middle Name"
                                     hide-details
                                     density="compact"
+                                    variant="outlined"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12">
@@ -51,6 +58,7 @@
                                     :items="networkList"
                                     hide-details
                                     density="compact"
+                                    variant="outlined"
                                 ></v-select>
                                 <!-- :rules="[v => !!v || 'Item is required']" -->
                             </v-col>
@@ -61,6 +69,7 @@
                                     :items="statusList"
                                     hide-details
                                     density="compact"
+                                    variant="outlined"
                                 ></v-select>
                                 <!-- :rules="[v => !!v || 'Item is required']" -->
                             </v-col>
@@ -70,69 +79,43 @@
                                     label="Contact No."
                                     hide-details
                                     density="compact"
+                                    variant="outlined"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-date-picker
+                                <v-date-input
                                     v-model="form.birthdate"
-                                    show-adjacent-months>
-                                    <!-- <template v-slot:header>
-                                    </template> -->
-                                </v-date-picker>
-                                <!-- <v-text-field
-                                    v-model="form.contactNo"
-                                    label="Contact No."
+                                    label="Birthdate"
                                     hide-details
                                     density="compact"
-                                ></v-text-field> -->
+                                    variant="outlined"
+                                    show-adjacent-months
+                                ></v-date-input>
+                                <!-- <v-date-picker
+                                    :model-value="form.birthdate"
+                                    show-adjacent-months
+                                    @input="onSelectDate()"
+                                    class="w-100">
+                                    <template v-slot:header>
+                                    </template>
+                                    <template v-slot:title>
+                                        Select Birthdate
+                                    </template>
+                                </v-date-picker> -->
                             </v-col>
-                            
                         </v-row>
-                        <!-- <v-text-field
-                            v-model="name"
-                            label="Name"
-                            required
-                        ></v-text-field>
-
-                        <v-select
-                            v-model="select"
-                            :items="items"
-                            :rules="[v => !!v || 'Item is required']"
-                            label="Item"
-                            required
-                        ></v-select> -->
-
-
-                        <div class="d-flex flex-column">
-                            <v-btn
-                            class="mt-4"
-                            color="success"
-                            block
-                            @click="validate"
-                            >
-                            Validate
-                            </v-btn>
-
-                            <!-- <v-btn
-                            class="mt-4"
-                            color="error"
-                            block
-                            @click="reset"
-                            >
-                            Reset Form
-                            </v-btn>
-
-                            <v-btn
-                            class="mt-4"
-                            color="warning"
-                            block
-                            @click="resetValidation"
-                            >
-                            Reset Validation
-                            </v-btn> -->
-                        </div>
                     </v-form>
                 </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                    <v-btn
+                        color="primary"
+                        variant="flat"
+                        block
+                        @click="validate">
+                        Submit
+                    </v-btn>
+                </v-card-actions>
             </v-card>
         </v-dialog>
     </div>
@@ -175,5 +158,9 @@ async function reset () {
 
 async function resetValidation () {
     this.$refs.form.resetValidation()
+}
+
+async function onSelectDate() {
+    console.log(form.value)
 }
 </script>

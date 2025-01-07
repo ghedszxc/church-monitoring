@@ -1,15 +1,18 @@
 <template>
     <v-card class="ma-8">
-        <v-toolbar class="px-6 py-3 text-h4">
-            Disciple Master
-            <v-spacer></v-spacer>
-            <add-disciple></add-disciple>
+        <v-toolbar :class="`px-6 py-3 text-${$vuetify.display.mdAndUp ? 'h4' : 'h6'}`">
+            <template v-slot:prepend>
+                Disciple Master
+            </template>
+            <template v-slot:append>
+                <add-disciple></add-disciple>
+            </template>
         </v-toolbar>
 
         <v-card-text>
             <v-data-iterator :items="discipleList">
                 <template v-slot:header>
-                    <v-list density="compact">
+                    <v-list density="compact" v-if="$vuetify.display.mdAndUp">
                         <v-list-item>
                             <v-list-item-title>
                                 <v-row no-gutters>
