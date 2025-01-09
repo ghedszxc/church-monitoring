@@ -58,6 +58,7 @@
                                     hide-details
                                     density="compact"
                                     variant="outlined"
+                                    type="number"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12" md="6">
@@ -81,6 +82,16 @@
                                     variant="outlined"
                                 ></v-select>
                                 <!-- :rules="[v => !!v || 'Item is required']" -->
+                            </v-col>
+                            <v-col cols="12">
+                                <v-textarea
+                                    v-model="form.address"
+                                    label="Address"
+                                    hide-details
+                                    density="compact"
+                                    variant="outlined"
+                                    rows="3"
+                                ></v-textarea>
                             </v-col>
                             <v-col cols="12">
                                 <v-date-input
@@ -128,12 +139,13 @@ export default {
     data:() => ({
         addDialog: false,
         form: {
-            surname: null,
-            givenName: null,
-            middleName: null,
-            network: null,
-            status: null,
-            contactNo: null,
+            surname: "",
+            givenName: "",
+            middleName: "",
+            network: "",
+            status: "",
+            contactNo: "",
+            address: "",
             birthdate: new Date()
         },
 

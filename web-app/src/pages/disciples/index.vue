@@ -125,10 +125,10 @@
                             <v-list-item>
                                 <v-list-item-title>
                                 <v-row no-gutters align="center">
-                                    <v-col cols="12" md="3" class="text-capitalize">
+                                    <v-col cols="12" md="3">
                                         <v-row no-gutters align="center">
                                             <span
-                                                class="text-capitalize text-body-2"
+                                                class="text-body-2"
                                                 style="word-break: break-word; white-space: normal"
                                             >
                                                 {{ `${item.raw.surname}, ${item.raw.givenName} ${item.raw.middleName}` }}
@@ -136,22 +136,22 @@
                                         </v-row>
                                     </v-col>
 
-                                    <v-col cols="12" md="1" class="text-capitalize">
+                                    <v-col cols="12" md="1">
                                         <v-row no-gutters align="center">
                                             <span
-                                            class="text-capitalize text-body-2"
-                                            style="word-break: break-word; white-space: normal"
+                                                class="text-body-2"
+                                                style="word-break: break-word; white-space: normal"
                                             >
                                             {{ item.raw?.status }}
                                             </span>
                                         </v-row>
                                     </v-col>
                                     
-                                    <v-col cols="12" md="1" class="text-capitalize">
+                                    <v-col cols="12" md="1">
                                         <v-row no-gutters align="center">
                                             <span
-                                            class="text-capitalize text-body-2"
-                                            style="word-break: break-word; white-space: normal"
+                                                class="text-body-2"
+                                                style="word-break: break-word; white-space: normal"
                                             >
                                             {{ item.raw.network }}
                                             </span>
@@ -161,52 +161,43 @@
                                     <v-col cols="12" md="1" class="text-capitalize">
                                         <v-row no-gutters align="center">
                                             <span
-                                            class="text-capitalize text-body-2"
-                                            style="word-break: break-word; white-space: normal"
+                                                class="text-body-2"
+                                                style="word-break: break-word; white-space: normal"
                                             >
                                             {{ getAge(item.raw?.birthdate) }}
                                             </span>
                                         </v-row>
                                     </v-col>
 
-                                    <v-col cols="12" md="2" class="text text-capitalize">
-                                        <v-row
-                                            no-gutters
-                                            class="fill-height"
-                                            align-content="center"
-                                        >
+                                    <v-col cols="12" md="2" class="text-capitalize">
+                                        <v-row no-gutters align="center">
                                             <span
-                                            class="d-inline-block text-truncate text-capitalize text-body-2"
+                                                class="text-body-2"
+                                                style="word-break: break-word; white-space: normal"
                                             >
-                                            {{ item.raw.birthdate }}
+                                            {{ formatDate(item.raw.birthdate) }}
                                             </span>
                                         </v-row>
                                     </v-col>
 
-                                    <v-col cols="12" md="2" class="text text-capitalize">
-                                        <v-row
-                                            no-gutters
-                                            class="fill-height"
-                                            align-content="center"
-                                        >
+                                    <v-col cols="12" md="2">
+                                        <v-row no-gutters align="center">
                                             <span
-                                            class="d-inline-block text-truncate text-capitalize text-body-2"
+                                                class="text-body-2"
+                                                style="word-break: break-word; white-space: normal"
                                             >
                                                 {{ item.raw.contactNo }}
                                             </span>
                                         </v-row>
                                     </v-col>
 
-                                    <v-col cols="12" md="2" class="text text-capitalize">
-                                        <v-row
-                                            no-gutters
-                                            class="fill-height"
-                                            align-content="center"
-                                        >
+                                    <v-col cols="12" md="2">
+                                        <v-row no-gutters align="center">
                                             <span
-                                            class="d-inline-block text-truncate text-capitalize text-body-2"
+                                                class="text-capitalize text-body-2"
+                                                style="word-break: break-word; white-space: normal"
                                             >
-                                            {{ item.raw.address }}
+                                            {{ item.raw.address.toLowerCase() }}
                                             </span>
                                         </v-row>
                                     </v-col>
@@ -245,5 +236,19 @@ function getAge(payload) {
     
 
     return age;
+}
+
+function formatDate(date) {
+    let formatDate = new Date(date)
+    let month = formatDate.getMonth() + 1; // Months are zero-based
+    let day = formatDate.getDate();
+    let year = formatDate.getFullYear();
+
+    let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+    // Add leading zero to month and day if they are single digits
+    // if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+    
+    return `${months[month+1]} ${day}, ${year}`;
 }
 </script>

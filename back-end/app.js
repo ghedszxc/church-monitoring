@@ -36,7 +36,7 @@ app.get('/disciples', (req, res) => {
 
 
 app.post('/register', (req, res) => {
-    connection.query("INSERT INTO `disciples` (`surname`, `givenName`, `middleName`, `status`, `birthdate`, `network`, `contactNo`, `address`) VALUES ('"+req.body.surname.toUpperCase()+"', '"+req.body.givenName.toUpperCase()+"', '"+req.body.middleName.toUpperCase()+"', '"+req.body.status+"', '"+req.body.birthdate+"', '"+req.body.network+"', '"+req.body.contactNo+"', '"+req.body.address+"')", function (err, response) {
+    connection.query("INSERT INTO `disciples` (`surname`, `givenName`, `middleName`, `status`, `birthdate`, `network`, `contactNo`, `address`) VALUES ('"+req.body.surname.toUpperCase()+"', '"+req.body.givenName.toUpperCase()+"', '"+req.body.middleName.toUpperCase()+"', '"+req.body.status+"', '"+req.body.birthdate+"', '"+req.body.network+"', '"+req.body.contactNo+"', '"+req.body.address.toUpperCase()+"')", function (err, response) {
         res.status(200).send(response);
     });
 });
