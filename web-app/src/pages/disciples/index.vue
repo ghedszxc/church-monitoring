@@ -2,7 +2,7 @@
     <v-card class="ma-8">
         <v-toolbar :class="`px-6 py-3 text-${$vuetify.display.mdAndUp ? 'h4' : 'h6'}`">
             <template v-slot:prepend>
-                Disciple Master
+                Master List
             </template>
             <template v-slot:append>
                 <add-disciple></add-disciple>
@@ -115,6 +115,14 @@
                                     </v-col>
                                 </v-row>
                             </v-list-item-title>
+                            <template v-slot:append>
+                                <v-icon
+                                    v-bind="props"
+                                    density="compact"
+                                    color="transparent">
+                                    mdi-dots-vertical
+                                </v-icon>
+                            </template>
                         </v-list-item>
                         <v-divider />
                     </v-list>
@@ -122,87 +130,107 @@
                 <template #default="{ items }">
                     <v-list density="compact">
                         <template v-for="(item, key) in items" :key="key">
-                            <v-list-item>
+                            <v-list-item :class="$vuetify.display.mobile && key ? 'py-4' : 'pb-4'">
                                 <v-list-item-title>
-                                <v-row no-gutters align="center">
-                                    <v-col cols="12" md="3">
-                                        <v-row no-gutters align="center">
-                                            <span
-                                                class="text-body-2"
-                                                style="word-break: break-word; white-space: normal"
-                                            >
-                                                {{ `${item.raw.surname}, ${item.raw.givenName} ${item.raw.middleName}` }}
-                                            </span>
-                                        </v-row>
-                                    </v-col>
+                                    <v-row no-gutters align="center">
+                                        <v-col cols="12" md="3">
+                                            <v-row no-gutters align="center">
+                                                <span
+                                                    class="text-body-2"
+                                                    style="word-break: break-word; white-space: normal"
+                                                >
+                                                    {{ `${item.raw.surname}, ${item.raw.givenName} ${item.raw.middleName}` }}
+                                                </span>
+                                            </v-row>
+                                        </v-col>
 
-                                    <v-col cols="12" md="1">
-                                        <v-row no-gutters align="center">
-                                            <span
-                                                class="text-body-2"
-                                                style="word-break: break-word; white-space: normal"
-                                            >
-                                            {{ item.raw?.status }}
-                                            </span>
-                                        </v-row>
-                                    </v-col>
-                                    
-                                    <v-col cols="12" md="1">
-                                        <v-row no-gutters align="center">
-                                            <span
-                                                class="text-body-2"
-                                                style="word-break: break-word; white-space: normal"
-                                            >
-                                            {{ item.raw.network }}
-                                            </span>
-                                        </v-row>
-                                    </v-col>
-                                    
-                                    <v-col cols="12" md="1" class="text-capitalize">
-                                        <v-row no-gutters align="center">
-                                            <span
-                                                class="text-body-2"
-                                                style="word-break: break-word; white-space: normal"
-                                            >
-                                            {{ getAge(item.raw?.birthdate) }}
-                                            </span>
-                                        </v-row>
-                                    </v-col>
+                                        <v-col cols="12" md="1">
+                                            <v-row no-gutters align="center">
+                                                <span
+                                                    class="text-body-2"
+                                                    style="word-break: break-word; white-space: normal"
+                                                >
+                                                {{ item.raw?.status }}
+                                                </span>
+                                            </v-row>
+                                        </v-col>
+                                        
+                                        <v-col cols="12" md="1">
+                                            <v-row no-gutters align="center">
+                                                <span
+                                                    class="text-body-2"
+                                                    style="word-break: break-word; white-space: normal"
+                                                >
+                                                {{ item.raw.network }}
+                                                </span>
+                                            </v-row>
+                                        </v-col>
+                                        
+                                        <v-col cols="12" md="1" class="text-capitalize">
+                                            <v-row no-gutters align="center">
+                                                <span
+                                                    class="text-body-2"
+                                                    style="word-break: break-word; white-space: normal"
+                                                >
+                                                {{ useGlobal().getAge(item.raw?.birthdate) }}
+                                                </span>
+                                            </v-row>
+                                        </v-col>
 
-                                    <v-col cols="12" md="2" class="text-capitalize">
-                                        <v-row no-gutters align="center">
-                                            <span
-                                                class="text-body-2"
-                                                style="word-break: break-word; white-space: normal"
-                                            >
-                                            {{ formatDate(item.raw.birthdate) }}
-                                            </span>
-                                        </v-row>
-                                    </v-col>
+                                        <v-col cols="12" md="2" class="text-capitalize">
+                                            <v-row no-gutters align="center">
+                                                <span
+                                                    class="text-body-2"
+                                                    style="word-break: break-word; white-space: normal"
+                                                >
+                                                {{ useGlobal().formatDate(item.raw.birthdate) }}
+                                                </span>
+                                            </v-row>
+                                        </v-col>
 
-                                    <v-col cols="12" md="2">
-                                        <v-row no-gutters align="center">
-                                            <span
-                                                class="text-body-2"
-                                                style="word-break: break-word; white-space: normal"
-                                            >
-                                                {{ item.raw.contactNo }}
-                                            </span>
-                                        </v-row>
-                                    </v-col>
+                                        <v-col cols="12" md="2">
+                                            <v-row no-gutters align="center">
+                                                <span
+                                                    class="text-body-2"
+                                                    style="word-break: break-word; white-space: normal"
+                                                >
+                                                    {{ item.raw.contactNo }}
+                                                </span>
+                                            </v-row>
+                                        </v-col>
 
-                                    <v-col cols="12" md="2">
-                                        <v-row no-gutters align="center">
-                                            <span
-                                                class="text-capitalize text-body-2"
-                                                style="word-break: break-word; white-space: normal"
-                                            >
-                                            {{ item.raw.address.toLowerCase() }}
-                                            </span>
-                                        </v-row>
-                                    </v-col>
-                                </v-row>
+                                        <v-col cols="12" md="2">
+                                            <v-row no-gutters align="center">
+                                                <span
+                                                    class="text-capitalize text-body-2"
+                                                    style="word-break: break-word; white-space: normal"
+                                                >
+                                                {{ item.raw.address.toLowerCase() }}
+                                                </span>
+                                            </v-row>
+                                        </v-col>
+                                    </v-row>
                                 </v-list-item-title>
+                                <template v-slot:append>
+                                    <v-menu location="start">
+                                        <template v-slot:activator="{ props }">
+                                            <v-icon
+                                                v-bind="props"
+                                                density="compact">
+                                                mdi-dots-vertical
+                                            </v-icon>
+                                        </template>
+                                        <v-list density="compact">
+                                            <v-list-item :to="`/suynl/${item.raw.id}`">
+                                                <template #title>
+                                                    <span class="text-caption">
+                                                        SUYNL
+                                                    </span>
+                                                </template>
+                                            </v-list-item>
+                                        </v-list>
+                                    </v-menu>
+                                </template>
                             </v-list-item>
 
                             <v-divider v-if="itemIndex + 1 !== items.length"></v-divider>
@@ -218,6 +246,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import Api from '@/services/api'
+import useGlobal from '@/composables/useGlobal';
 
 const discipleList = ref([])
 
@@ -225,30 +254,4 @@ onMounted(async () => {
     const res = await Api.getDiscipleList()
     discipleList.value = res.data
 })
-
-function getAge(payload) {
-    var today = new Date();
-    var birthDate = new Date(payload);
-
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
-    
-
-    return age;
-}
-
-function formatDate(date) {
-    let formatDate = new Date(date)
-    let month = formatDate.getMonth() + 1; // Months are zero-based
-    let day = formatDate.getDate();
-    let year = formatDate.getFullYear();
-
-    let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
-    // Add leading zero to month and day if they are single digits
-    // if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
-    
-    return `${months[month+1]} ${day}, ${year}`;
-}
 </script>

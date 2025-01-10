@@ -4,6 +4,9 @@ export default {
     getDiscipleList() {
         return Api().get('/disciples')
     },
+    getDisciple(id) {
+        return Api().get(`/disciple/${id}`)
+    },
     
     registerDisciple(data) {
         return Api().post('/register', data)

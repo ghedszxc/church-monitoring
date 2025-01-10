@@ -9,7 +9,6 @@
             ></v-app-bar-nav-icon>
 
             <!-- <v-toolbar-title>{{ drawer }}</v-toolbar-title> -->
-
             <v-spacer></v-spacer>
 
             <!-- <template v-if="$vuetify.display.mdAndUp">
@@ -23,7 +22,6 @@
 
         <v-navigation-drawer
             v-model="drawer"
-            :permanent="$vuetify.display.mobile"
         >
             <v-list>
                 <!-- <v-list-item @click="drawer = !drawer">
@@ -44,32 +42,20 @@
         </v-navigation-drawer>
     </div>
 </template>
-<script setup>
-import { ref, onMounted, watch } from 'vue'
-
-const drawer = ref(true);
-const routes = ref([
-    {
-        title: 'Attendance',
-        value: '/attendance',
-    },
-    {
-        title: 'Disciples',
-        value: '/disciples',
-    },
-    // {
-    //     title: 'Events',
-    //     value: '/events',
-    // },
-])
-
-// onMounted(() => {
-// })
-
-// watch(
-//   () => props.templateList,
-//   (newVal) => {
-//     localTemplateList.value = newVal;
-//   },
-// );
+<script>
+export default {
+    data:() => ({
+        drawer: true,
+        routes: [
+            {
+                title: 'Attendance',
+                value: '/attendance',
+            },
+            {
+                title: 'Disciples',
+                value: '/disciples',
+            },
+        ],
+    }),
+}
 </script>
