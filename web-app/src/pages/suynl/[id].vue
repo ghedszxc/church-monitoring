@@ -2,9 +2,10 @@
     <v-row class="pa-8">
         <v-col cols="12" md="4">
             <v-card class="rounded-lg">
+                <v-toolbar class="px-5 text-h6 font-weight-bold">
+                    General Information
+                </v-toolbar>
                 <v-card-text>
-                    <div class="font-weight-bold text-h6"> General Information </div>
-
                     <div class="text-center my-4">
                         <v-avatar size="150">
                             <v-img
@@ -86,7 +87,7 @@
         </v-col>
         <v-col cols="12" md="8">
             <v-card class="rounded-lg">
-                <v-toolbar class="px-6 text-h5 font-weight-bold">
+                <v-toolbar class="px-6 text-h6 font-weight-bold">
                     SUYNL
                 </v-toolbar>
                 
