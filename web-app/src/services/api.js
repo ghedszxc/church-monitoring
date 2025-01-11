@@ -10,5 +10,9 @@ export default {
     
     registerDisciple(data) {
         return Api().post('/register', data)
+    },
+
+    populateSuynl(data) {
+        return Api().post('/suynl', data)
     }
 }

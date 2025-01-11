@@ -1,13 +1,15 @@
 import { ref } from "vue";
 export default function useGlobal() {
-//   const tab = useState("announcementTab", () => "active");
 
+  const discipleList = ref([]);
+  const selectedDisciple = ref(null);
 
-const discipleList = ref([]);
-
-const selectedDisciple = ref(null);
-
-
+  const snackbar = ref({
+    msg: '',
+    isActive: false,
+    timeout: 3000,
+    color: ''
+  })
 
 //   async function deleteAnnouncementById(id: string) {
 //     const { error, data } = await useLocalFetch(`/api/announcements/v1/${id}`, {
@@ -24,6 +26,14 @@ const selectedDisciple = ref(null);
 //       return Promise.resolve(result.value.message as string);
 //     }
 //   }
+  function displaySnackbar(payload) {
+    snackbar.value.isActive = payload.isActive
+    snackbar.value.color = payload.color
+    snackbar.value.msg = payload.msg
+    console.log("!!! snackbar: ", JSON.stringify(snackbar.value))
+    console.log("!!! payload: ", payload)
+    // snackbar.value = payload
+  }
 
   function getAge(payload) {
     var today = new Date();
@@ -57,6 +67,8 @@ const selectedDisciple = ref(null);
     formatDate,
     
     discipleList,
-    selectedDisciple
+    selectedDisciple,
+    snackbar,
+    displaySnackbar
   };
 }

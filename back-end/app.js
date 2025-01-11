@@ -42,9 +42,22 @@ app.post('/register', (req, res) => {
 
 app.get('/disciple/:id', (req, res) => {
     const id = req.params.id;
-    // console.log("id: ", id)
-    // res.send(req.params.id)
+    
     connection.query("SELECT * FROM `disciples` WHERE id='"+id+"'", function (err, response) {
         res.status(200).send(response[0]);
+    });
+});
+
+
+app.post('/suynl', (req, res) => {
+    connection.query("SELECT * FROM `suynl` WHERE discipleId='"+req.body.discipleId+"' AND status='"+req.body.status+"'", function (err, validate) {
+        
+        const selectQuery = !validate.length ?
+                            "INSERT INTO `suynl` (`discipleId`, `status`, `date`, `remarks`) VALUES ('"+req.body.discipleId+"', '"+req.body.status+"', '"+req.body.date+"', '"+req.body.remarks+"')" :
+                            "UPDATE `suynl` SET `discipleId`='"+req.body.discipleId+"', `status`='"+req.body.status+"', `date`='"+req.body.date+"', `remarks`='"+req.body.remarks+"'"
+        
+        connection.query(selectQuery, function (er, result) {
+            res.status(200).send(result);
+        });
     });
 });

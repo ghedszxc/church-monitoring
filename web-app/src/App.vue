@@ -3,6 +3,7 @@
     <tool-bar />
     <v-main>
       <router-view />
+    <snack-bar />
     </v-main>
   </v-app>
 </template>
