@@ -15,11 +15,11 @@ app.listen(PORT, (error) => {
     console.log(!error ? `Server is Successfully Running, and App is listening on port: ${PORT}` : `Error occurred, server can't start: ${error}`)
 });
 
-// app.get('/disciples', (req, res) => {
-//     res.send({
-//         msg: 'hello'
-//     })
-// })
+app.get('/samplepath', (req, res) => {
+    res.send({
+        msg: 'hello'
+    })
+})
 
 
 // const express = require('express');
