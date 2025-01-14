@@ -4,7 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT;
 
 app.use(morgan('combined'))
 app.use(bodyParser.urlencoded({ extended: false }));
