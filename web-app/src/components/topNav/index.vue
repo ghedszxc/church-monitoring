@@ -8,7 +8,6 @@
       />
     </div>
     <div class="flex-2 place-content-center text-end lg:text-center">
-      <!-- $route.path -->
       <div class="hidden lg:inline">
         <template v-for="(item, key) in menus" :key="key">
           <a
