@@ -2,7 +2,7 @@
   <nav class="h-[4rem] lg:h-[5rem] flex">
     <div class="flex-1 place-content-end">
       <img
-        src="/public/logo.jpg"
+        src="/src/assets/images/logo.jpg"
         alt="logo"
         class="place-self-start lg:place-self-end h-full w-auto"
       />
@@ -19,7 +19,11 @@
           </a>
         </template>
       </div>
-      <div class="inline lg:hidden mr-4">=</div>
+      <div class="inline lg:hidden mr-4">
+        <button>
+          <i class="pi pi-bars rounded-full p-3 hover:bg-slate-100 hover:cursor-pointer"></i>
+        </button>
+      </div>
     </div>
   </nav>
 </template>
