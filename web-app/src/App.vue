@@ -9,6 +9,7 @@
 
   <TopNav />
 
+  <!-- {{ theme }} -->
   <RouterView />
 </template>
 
@@ -17,6 +18,11 @@ import { RouterLink, RouterView } from 'vue-router'
 import TopNav from '@/components/topNav/index.vue'
 export default {
   components: { TopNav },
+  computed: {
+    theme() {
+      return this.$store.state.theme
+    },
+  },
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="mt-1">
-    Landing
+    Darwin Bading!
     <!-- <ImageBanner :url="'fd-26.jpg'" :alt="'faith declaration 2026'" /> -->
   </div>
 </template>
