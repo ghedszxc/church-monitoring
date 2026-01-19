@@ -1,6 +1,6 @@
 <template>
   <div class="mt-1">
-    HNeed Bading?
+    Need Bading?
     <a href="https://www.facebook.com/darwin.palisoc.2024" class="text-blue-500"
       >Click here to hire</a
     >
