@@ -3,7 +3,7 @@
     <!-- <ImageBanner :url="'fd-26.jpg'" :alt="'faith declaration 2026'" /> -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <template v-for="(data, key) in items" :key="key">
-        <CardCount :data="data" />
+        <CardCount :data="data" :index="key" />
       </template>
     </div>
   </div>

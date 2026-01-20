@@ -1,16 +1,7 @@
 <template>
   <div class="rounded-lg shadow-lg grid place-items-center py-3">
-    <span>{{ data?.count }}</span>
+    <span :id="`count_${index}`" class="text-[3rem] font-bold">{{ data?.count }}</span>
 
-    <!-- <NumberAnimation
-      ref="number1"
-      :from="100"
-      :to="10000"
-      :format="theFormat"
-      :duration="5"
-      autoplay
-      easing="linear"
-    /> -->
     <i :class="`pi ${data?.icon} text-red-500 text-[4rem] my-2`"></i>
     <h3>
       {{ data?.text }}
@@ -20,6 +11,24 @@
 
 <script>
 export default {
-  props: ['data'],
+  props: ['data', 'index'],
+  mounted() {
+    const counterElement = document.getElementById(`count_${this.index}`)
+    const targetNumber = this.data.count
+
+    let currentNumber = 0
+    const intervalTime = 20 // Time in milliseconds between updates
+
+    const interval = setInterval(() => {
+      currentNumber += 1
+
+      if (currentNumber >= targetNumber) {
+        currentNumber = targetNumber
+        clearInterval(interval)
+      }
+
+      counterElement.textContent = currentNumber
+    }, intervalTime)
+  },
 }
 </script>
