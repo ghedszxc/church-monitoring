@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-[1.7rem] md:text-3xl uppercase">Birthday Celebrants</h2>
+    <h2 class="text-[1.7rem] uppercase">Birthday Celebrants</h2>
     <div class="mt-2">
       <template v-for="(data, key) in sortedCelebrants" :key="key">
         <div
