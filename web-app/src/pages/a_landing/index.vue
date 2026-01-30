@@ -1,13 +1,13 @@
 <template>
   <div
-    class="mt-12 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-12 px-3"
+    class="mt-12 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center grid grid-cols-1 md:grid-cols-2 gap-8 xl:gap-12 px-3"
   >
     <!-- <ImageBanner :url="'fd-26.jpg'" :alt="'faith declaration 2026'" /> -->
     <Birthday />
 
     <div>
       <h2 class="text-3xl uppercase text-[#ffffff]">.</h2>
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
         <template v-for="(data, key) in items" :key="key">
           <CardCount :data="data" :index="key">
             <template #actualCount>{{ data?.count }}</template>
