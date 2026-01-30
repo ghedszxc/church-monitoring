@@ -34,7 +34,7 @@ const today = ref(new Date())
 const weekDates = ref([])
 
 const celebrants = ref([
-  { givenName: 'Leia Therese', surname: 'Mendiola', birthdate: '01/31/2026' },
+  { givenName: 'Leia Therese', surname: 'Mendiola', birthdate: '01/25/2026' },
   { givenName: 'Hana', surname: 'Mendiola', birthdate: '01/25/2025' },
   { givenName: 'Darwin', surname: 'Bading', birthdate: '01/29/1700' },
   { givenName: 'Gerard', surname: 'Mendiola', birthdate: '01/24/2024' },
