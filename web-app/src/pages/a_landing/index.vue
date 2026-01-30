@@ -1,7 +1,7 @@
 <template>
   <div class="mt-12 w-[95vw] lg:w-[75vw] place-self-center">
     <!-- <ImageBanner :url="'fd-26.jpg'" :alt="'faith declaration 2026'" /> -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       <template v-for="(data, key) in items" :key="key">
         <CardCount :data="data" :index="key" />
       </template>
@@ -19,10 +19,8 @@ export default {
   },
   data: () => ({
     items: [
-      { text: 'Registered Disciples', icon: 'pi-users', count: 75 },
-      { text: 'Active Disciples', icon: 'pi-user', count: 65 },
-      { text: 'Registered Leaders', icon: 'pi-android', count: 35 },
-      { text: 'Active Leaders', icon: 'pi-apple', count: 25 },
+      { text: 'Disciples', icon: 'pi-users', count: 75 },
+      { text: 'Leaders', icon: 'pi-user', count: 35 },
     ],
   }),
 }
