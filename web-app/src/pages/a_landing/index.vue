@@ -1,9 +1,14 @@
 <template>
   <div class="mt-12 w-[95vw] lg:w-[75vw] place-self-center">
     <!-- <ImageBanner :url="'fd-26.jpg'" :alt="'faith declaration 2026'" /> -->
+
     <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       <template v-for="(data, key) in items" :key="key">
-        <CardCount :data="data" :index="key" />
+        <CardCount :data="data" :index="key">
+          <template #actualCount>{{ data?.count }}</template>
+          <template #icon><i :class="`pi ${data?.icon} text-red-500 text-[2rem] mr-3`" /></template>
+          <template #subtitle>{{ data?.text }}</template>
+        </CardCount>
       </template>
     </div>
   </div>

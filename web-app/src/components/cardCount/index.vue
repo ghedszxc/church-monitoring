@@ -1,10 +1,12 @@
 <template>
   <div class="rounded-lg shadow-lg py-4 custom-div">
-    <span :id="`count_${index}`" class="text-[3rem] font-bold">{{ props?.data?.count }}</span>
+    <span :id="`count_${index}`" class="text-[3rem] font-bold">
+      <slot name="actualCount"></slot>
+    </span>
 
     <div class="flex md:grid lg:flex place-items-center mt-2">
-      <i :class="`pi ${props?.data?.icon} text-red-500 text-[2rem] mr-3`"></i>
-      <span class="mt-0 md:mt-2 lg:mt-0">{{ props?.data?.text }}</span>
+      <slot name="icon"></slot>
+      <span class="mt-0 md:mt-2 lg:mt-0"> <slot name="subtitle"></slot></span>
     </div>
   </div>
 </template>
