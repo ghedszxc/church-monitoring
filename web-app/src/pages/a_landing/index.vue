@@ -1,18 +1,23 @@
 <template>
   <div
-    class="mt-12 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center grid grid-cols-1 lg:grid-cols-2"
+    class="mt-12 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-12"
   >
     <!-- <ImageBanner :url="'fd-26.jpg'" :alt="'faith declaration 2026'" /> -->
     <Birthday />
 
-    <div class="grid grid-cols-2 gap-4 border border-red-500">
-      <template v-for="(data, key) in items" :key="key">
-        <CardCount :data="data" :index="key">
-          <template #actualCount>{{ data?.count }}</template>
-          <template #icon><i :class="`pi ${data?.icon} text-red-500 text-[2rem] mr-3`" /></template>
-          <template #subtitle>{{ data?.text }}</template>
-        </CardCount>
-      </template>
+    <div>
+      <h2 class="text-3xl uppercase text-[#ffffff]">.</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <template v-for="(data, key) in items" :key="key">
+          <CardCount :data="data" :index="key">
+            <template #actualCount>{{ data?.count }}</template>
+            <template #icon
+              ><i :class="`pi ${data?.icon} text-red-500 text-[2rem] mr-3`"
+            /></template>
+            <template #subtitle>{{ data?.text }}</template>
+          </CardCount>
+        </template>
+      </div>
     </div>
   </div>
 </template>

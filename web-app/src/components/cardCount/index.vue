@@ -45,6 +45,7 @@ onMounted(async () => {
   place-items: center;
 
   @media screen and (max-width: 768px) {
+    height: auto;
     display: flex;
     justify-content: center;
     gap: 15px;
