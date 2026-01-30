@@ -76,8 +76,6 @@ const currentAge = computed(() => {
     let age = today.value.getFullYear() - birthDate.getFullYear()
     const m = today.value.getMonth() - birthDate.getMonth()
 
-    console.log(birthDate, age)
-
     // If the current month is before the birth month, or it's the same month but
     // the current day is before the birth day, the birthday hasn't happened this year yet.
     if (m < 0 || (m === 0 && today.value.getDate() < birthDate.getDate())) age--
