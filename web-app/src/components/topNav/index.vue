@@ -27,16 +27,39 @@
         </template>
       </div>
       <div class="inline lg:hidden mr-4">
-        <button>
+        <button @click="updateNavDrawer()">
           <i class="pi pi-bars rounded-full p-3 hover:bg-slate-100 hover:cursor-pointer"></i>
         </button>
       </div>
     </div>
   </nav>
+
+  <div class="custom-nav-drawer">
+    <button @click="updateNavDrawer()" class="text-white mt-2">
+      <i
+        class="text-2xl pi pi-angle-right rounded-full p-3 hover:bg-slate-100 hover:cursor-pointer"
+      />
+    </button>
+
+    <div>
+      <ul>
+        <li v-for="(item, key) in menus" :key="key" :class="`${item?.text && 'py-1'}`">
+          <a
+            v-if="item?.text"
+            :href="item?.url"
+            :target="item.isExternal ? '_blank' : '_self'"
+            :class="`font-[300] text-white ${$route.path == item.url && 'border-l-3 border-white pl-2 pb-1 font-[500]'}`"
+          >
+            {{ item?.text }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onBeforeMount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -70,7 +93,20 @@ const menus = ref([
   },
 ])
 
+onBeforeMount(() => {
+  console.log(window.location.pathname)
+  if (window.location.pathname == '/dashboard') {
+    menus.value.push({
+      text: 'Dashboard',
+      url: '/dashboard',
+      isExternal: false,
+    })
+  }
+  // console.log(route.path)
+})
+
 const isAuthenticated = ref(localStorage?.getItem('isAuthenticated'))
+const displayNavDrawer = ref(false)
 
 function onTrigger(url) {
   // if (isAuthenticated.value == 'false' || isAuthenticated.value == null) {
@@ -80,4 +116,38 @@ function onTrigger(url) {
   //   localStorage.setItem('isAuthenticated', false)
   // }
 }
+
+function updateNavDrawer() {
+  displayNavDrawer.value = !displayNavDrawer.value
+
+  const customNavDrawer = document.getElementsByClassName('custom-nav-drawer')[0]
+
+  customNavDrawer.style.visibility = 'visible'
+  customNavDrawer.style.transform = `translateX(${displayNavDrawer.value ? 0 : '300px'})`
+}
 </script>
+
+<style scoped>
+.custom-nav-drawer {
+  background-color: oklch(63.7% 0.237 25.331);
+
+  visibility: hidden;
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  overflow-x: hidden;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(300px);
+
+  @media screen and (max-width: 425px) {
+    width: 100vw;
+  }
+
+  div {
+    margin-left: 20px;
+  }
+}
+</style>

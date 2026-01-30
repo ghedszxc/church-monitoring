@@ -44,7 +44,7 @@ onMounted(async () => {
   display: grid;
   place-items: center;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1023px) {
     height: auto;
     display: flex;
     justify-content: center;
