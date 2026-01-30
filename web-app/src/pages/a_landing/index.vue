@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mt-12 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-12 p-2"
+    class="mt-12 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-12 px-3"
   >
     <!-- <ImageBanner :url="'fd-26.jpg'" :alt="'faith declaration 2026'" /> -->
     <Birthday />
