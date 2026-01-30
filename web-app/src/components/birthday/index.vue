@@ -4,7 +4,7 @@
     <div class="mt-2">
       <template v-for="(data, key) in sortedCelebrants" :key="key">
         <div
-          :class="` border-l-4 mb-2 p-2 ${key % 2 === 0 ? 'bg-slate-50 border-slate-400 ' : 'bg-sky-50 border-sky-400 '}`"
+          :class="` border-l-4 mb-2 p-2 ${key % 2 === 0 ? 'bg-slate-50 border-slate-400' : 'bg-sky-50 border-sky-400'}`"
         >
           <strong> {{ dateFormat(data.date) }}</strong>
 

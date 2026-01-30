@@ -12,6 +12,11 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: () => import('@/pages/login/index.vue'),
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: () => import('@/pages/dashboard/index.vue'),
       // meta: { requiresAuth: true },
     },
   ],
