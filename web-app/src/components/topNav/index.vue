@@ -142,10 +142,6 @@ function updateNavDrawer() {
   transition: transform 0.5s ease-in-out;
   transform: translateX(300px);
 
-  @media screen and (max-width: 425px) {
-    width: 100vw;
-  }
-
   div {
     margin-left: 20px;
   }
