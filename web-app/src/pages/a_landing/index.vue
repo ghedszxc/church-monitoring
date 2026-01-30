@@ -4,7 +4,7 @@
       <img src="@/assets/images/fd-26.jpg" class="h-full w-full" />
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 xl:gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 xl:gap-12 mb-6 lg:mb-12">
       <Birthday />
 
       <div>
