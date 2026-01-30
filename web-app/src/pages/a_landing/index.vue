@@ -1,10 +1,10 @@
 <template>
-  <div class="mt-12 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center px-2">
-    <div class="my-6 lg:my-12">
+  <div class="my-8 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center px-2">
+    <div class="mb-6">
       <img src="@/assets/images/fd-26.jpg" class="h-full w-full" />
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 xl:gap-12 mb-6 lg:mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 xl:gap-12 mb-6">
       <Birthday />
 
       <div>
