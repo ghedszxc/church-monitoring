@@ -1,2 +1,25 @@
 @import 'tailwindcss';
-@import './base.css';
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('./fonts/TTNormsPro-Light.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('./fonts/TTNormsPro-Medium.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('./fonts/TTNormsPro-Bold.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@theme {
+  --font-tt-norms-pro: 'TT Norms Pro';
+}

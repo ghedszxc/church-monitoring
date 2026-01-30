@@ -12,7 +12,7 @@
         <template v-for="(item, key) in menus" :key="key">
           <a
             :href="item?.url"
-            :class="`mr-6 px-2 py-3 ${$route.path == item.url && 'border-b-3 border-red-500 pb-1 font-bold'}`"
+            :class="`mr-6 px-2 py-3 font-[300] ${$route.path == item.url && 'border-b-3 border-red-500 pb-1 font-[500]'}`"
           >
             {{ item?.text }}
           </a>

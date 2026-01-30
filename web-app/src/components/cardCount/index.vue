@@ -6,7 +6,7 @@
 
     <div class="flex md:grid lg:flex place-items-center mt-2">
       <slot name="icon"></slot>
-      <span class="mt-0 md:mt-2 lg:mt-0"> <slot name="subtitle"></slot></span>
+      <span class="mt-0 md:mt-2 lg:mt-0 font-[100]"> <slot name="subtitle"></slot></span>
     </div>
   </div>
 </template>
