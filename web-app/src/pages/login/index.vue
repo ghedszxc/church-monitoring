@@ -33,6 +33,7 @@ function onSubmit() {
     router.push('/dashboard')
   } else {
     alert('Code is incorrect!')
+    code.value = ''
   }
 }
 </script>

@@ -10,7 +10,7 @@
     </div>
     <div class="flex-2 place-content-center text-end lg:text-center">
       <div class="hidden lg:inline">
-        <template v-for="(item, key) in menus" :key="key">
+        <template v-for="(item, key) in store.state.menus" :key="key">
           <a
             v-if="item?.text"
             :href="item?.url"
@@ -28,7 +28,7 @@
               <ul class="bg-white border border-gray-300 w-30 text-left mt-1">
                 <template v-for="(subItem, key_1) in item?.subLinks" :key="key_1">
                   <li
-                    :class="`py-2 px-3 hover:cursor-pointer hover:bg-gray-100 ${key_1 < item?.subLinks?.length - 1 && 'border-b border-gray-300'}`"
+                    :class="`py-2 px-3 hover:cursor-pointer hover:bg-gray-100 ${key_1 < item?.subLinks?.length - 1 && 'border-b border-gray-300'} ${$route.path == subItem.url && 'bg-red-500 text-white font-[500]'}`"
                     @click="onRedirect(subItem)"
                   >
                     <i v-if="subItem?.icon" :class="`${subItem?.icon} text-[0.75rem] mr-1`" />
@@ -58,9 +58,9 @@
 
     <div>
       <ul>
-        <li v-for="(item, key) in menus" :key="key" :class="`${item?.text && 'py-1'}`">
+        <li v-for="(item, key) in store.state.menus" :key="key" :class="`${item?.text && 'py-1'}`">
           <a
-            v-if="displayLogin(item?.text)"
+            v-if="displayLogin(item.text)"
             :href="item?.url"
             :target="item.isExternal ? '_blank' : '_self'"
             :class="`font-[300] text-white ${$route.path == item.url && 'border-l-3 border-white pl-2 pb-1 font-[500]'}`"
@@ -108,53 +108,20 @@ const store = useStore()
 const router = useRouter()
 const route = useRoute()
 
-const menus = ref([
-  {
-    text: 'Home',
-    url: '/',
-    isExternal: false,
-  },
-  {
-    text: 'Social Media',
-    url: 'https://www.facebook.com/visionchurchbocaue',
-    isExternal: true,
-  },
-  {
-    text: 'About Us',
-    url: '/about-us',
-    isExternal: false,
-  },
-  {
-    text: 'Contact Us',
-    url: '/contact-us',
-    isExternal: false,
-  },
-  {
-    text: '',
-    icon: 'pi pi-user',
-    url: '/login',
-    isExternal: false,
-  },
-])
-
 const isAuthenticated = ref(localStorage?.getItem('isAuthenticated'))
 const displayNavDrawer = ref(false)
 
 watch(
   () => route.path,
-  async (newValue, oldValue) => {
-    if (newValue == '/dashboard' && oldValue == '/login') {
-      validateAuthentication()
-      menus.value.map((data) => {
-        displayLogin(data.text)
-      })
-    }
+  async () => {
+    isAuthenticated.value = localStorage?.getItem('isAuthenticated')
+    store.dispatch('UPDATE_MENU_FOR_USER', isAuthenticated.value)
   },
   { immediate: true },
 )
 
 onBeforeMount(() => {
-  validateAuthentication()
+  store.getters.reconstructMenus
 })
 
 function displayLogin(text) {
@@ -178,11 +145,15 @@ function updateNavDrawer() {
 }
 
 function onUpdateDropdown() {
-  const dropdownMenu = document.getElementById('dropdown_menu')
-  dropdownMenu.style.visibility =
-    !dropdownMenu.style.visibility || dropdownMenu.style.visibility == 'hidden'
-      ? 'visible'
-      : 'hidden'
+  if (isAuthenticated.value == null || isAuthenticated.value == 'false') {
+    router.push('/login')
+  } else {
+    const dropdownMenu = document.getElementById('dropdown_menu')
+    dropdownMenu.style.visibility =
+      !dropdownMenu.style.visibility || dropdownMenu.style.visibility == 'hidden'
+        ? 'visible'
+        : 'hidden'
+  }
 }
 
 function onRedirect(data) {
@@ -192,35 +163,7 @@ function onRedirect(data) {
     localStorage.setItem('isAuthenticated', false)
     router.push('/login')
 
-    menus.value[4] = {
-      text: '',
-      icon: 'pi pi-user',
-      url: '/login',
-      isExternal: false,
-    }
-
     alert('Logged out!')
-  }
-}
-
-async function validateAuthentication() {
-  const validateAuth = localStorage.getItem('isAuthenticated')
-
-  if (validateAuth == 'true') {
-    menus.value[4].subLinks = [
-      {
-        text: 'Dashboard',
-        action: 'redirect',
-        url: '/dashboard',
-        icon: '',
-      },
-      {
-        text: 'Log Out',
-        action: 'logout',
-        url: '',
-        icon: 'pi pi-sign-out',
-      },
-    ]
   }
 }
 </script>

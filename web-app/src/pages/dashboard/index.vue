@@ -71,6 +71,11 @@ const fullNetworkString = computed(() => {
     return networks[data]
   }
 })
+
+onBeforeMount(() => {
+  const validateAuth = localStorage.getItem('isAuthenticated')
+  router.push(`${validateAuth == 'true' ? '/dashboard' : '/login'}`)
+})
 </script>
 
 <style scoped>
