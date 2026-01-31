@@ -42,3 +42,16 @@ body {
     color 0.5s,
     background-color 0.5s;
 }
+
+/* FOR COMPONENTS/ELEMENTS */
+input,
+select {
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+button {
+  cursor: pointer;
+}

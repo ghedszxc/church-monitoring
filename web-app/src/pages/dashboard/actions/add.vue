@@ -9,11 +9,47 @@
 
   <div class="custom-dialog-shadow">
     <div class="custom-dialog">
-      <button class="float-right m-3 md:m-4" @click="onUpdateDialog()">
-        <i class="pi pi-times" />
-      </button>
+      <div class="relative h-full">
+        <div class="flex place-content-between m-3 md:m-4">
+          <h3 class="text-[1.3rem]">Add New Disciple</h3>
+          <button class="" @click="onUpdateDialog()">
+            <i class="pi pi-times" />
+          </button>
+        </div>
 
-      <form @submit.prevent="onAddDisciple()"></form>
+        <form @submit.prevent="onAddDisciple()" class="px-3 md:px-4 mt-4 md:mt-6">
+          <input
+            type="text"
+            v-model="form.givenName"
+            placeholder="Input first name"
+            required
+            class="mb-3"
+          />
+          <input
+            type="text"
+            v-model="form.surname"
+            placeholder="Input surname"
+            required
+            class="mb-3"
+          />
+          <div class="flex grid-cols-1 md:grid-cols-2 gap-3">
+            <select v-model="form.network" required>
+              <option value="" disabled>Select network</option>
+              <option value="YM">Youth Men</option>
+              <option value="YW">Youth Women</option>
+              <option value="M">Youth Men</option>
+              <option value="W">Women</option>
+            </select>
+            <input type="date" v-model="form.birthdate" placeholder="Input birthdate" required />
+          </div>
+
+          <button
+            class="bg-sky-500 hover:bg-sky-400 mt-3 py-2 px-4 rounded-sm text-white font-[500] w-full"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -31,6 +67,7 @@ function onUpdateDialog() {
 const form = ref({
   givenName: '',
   surname: '',
+  network: '',
   birthdate: '',
 })
 
@@ -60,7 +97,7 @@ function onAddDisciple() {
   right: 0;
   margin: auto;
 
-  height: 50vh;
+  height: 300px;
   width: 30vw;
   background-color: #ffffff;
   z-index: 2;
