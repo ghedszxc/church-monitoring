@@ -60,15 +60,20 @@
       <ul>
         <li v-for="(item, key) in menus" :key="key" :class="`${item?.text && 'py-1'}`">
           <a
-            v-if="item?.text"
+            v-if="displayLogin(item?.text)"
             :href="item?.url"
             :target="item.isExternal ? '_blank' : '_self'"
             :class="`font-[300] text-white ${$route.path == item.url && 'border-l-3 border-white pl-2 pb-1 font-[500]'}`"
           >
-            {{ item?.text }}
+            <i v-if="!item?.text" :class="`${item.icon} text-[0.75rem] mr-1 mt-3`" />
+            {{ `${item?.text ? item?.text : 'Login'}` }}
           </a>
 
-          <template v-else v-for="(subItem, key_1) in item?.subLinks" :key="key_1">
+          <template
+            v-if="item?.subLinks?.length"
+            v-for="(subItem, key_1) in item?.subLinks"
+            :key="key_1"
+          >
             <a
               v-if="subItem.action != 'logout'"
               :href="subItem.url"
@@ -94,13 +99,14 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { onBeforeMount, onMounted, ref, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
 const store = useStore()
 
 const router = useRouter()
+const route = useRoute()
 
 const menus = ref([
   {
@@ -131,38 +137,35 @@ const menus = ref([
   },
 ])
 
-onBeforeMount(() => {
-  const validateAuth = localStorage.getItem('isAuthenticated')
-  // console.log('topnav: ', validateAuth)
-
-  if (validateAuth == 'true') {
-    menus.value[4].subLinks = [
-      {
-        text: 'Dashboard',
-        action: 'redirect',
-        url: '/dashboard',
-        icon: '',
-      },
-      {
-        text: 'Log Out',
-        action: 'logout',
-        url: '',
-        icon: 'pi pi-sign-out',
-      },
-    ]
-  }
-})
-
 const isAuthenticated = ref(localStorage?.getItem('isAuthenticated'))
 const displayNavDrawer = ref(false)
 
-function onTrigger(url) {
-  // if (isAuthenticated.value == 'false' || isAuthenticated.value == null) {
-  router.push(url)
-  // } else {
-  //   router.push('/')
-  //   localStorage.setItem('isAuthenticated', false)
-  // }
+watch(
+  () => route.path,
+  async (newValue, oldValue) => {
+    if (newValue == '/dashboard' && oldValue == '/login') {
+      validateAuthentication()
+      menus.value.map((data) => {
+        displayLogin(data.text)
+      })
+    }
+  },
+  { immediate: true },
+)
+
+onBeforeMount(() => {
+  validateAuthentication()
+})
+
+function displayLogin(text) {
+  if (
+    localStorage?.getItem('isAuthenticated') == null ||
+    localStorage?.getItem('isAuthenticated') == 'false'
+  ) {
+    return true
+  } else {
+    return text ? true : false
+  }
 }
 
 function updateNavDrawer() {
@@ -188,7 +191,6 @@ function onRedirect(data) {
   } else if (data.action == 'logout') {
     localStorage.setItem('isAuthenticated', false)
     router.push('/login')
-    updateNavDrawer()
 
     menus.value[4] = {
       text: '',
@@ -198,6 +200,27 @@ function onRedirect(data) {
     }
 
     alert('Logged out!')
+  }
+}
+
+async function validateAuthentication() {
+  const validateAuth = localStorage.getItem('isAuthenticated')
+
+  if (validateAuth == 'true') {
+    menus.value[4].subLinks = [
+      {
+        text: 'Dashboard',
+        action: 'redirect',
+        url: '/dashboard',
+        icon: '',
+      },
+      {
+        text: 'Log Out',
+        action: 'logout',
+        url: '',
+        icon: 'pi pi-sign-out',
+      },
+    ]
   }
 }
 </script>
