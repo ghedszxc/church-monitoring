@@ -23,3 +23,15 @@
 @theme {
   --font-tt-norms-pro: 'TT Norms Pro';
 }
+
+/* FOR COMPONENTS/ELEMENTS */
+input {
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+button {
+  cursor: pointer;
+}

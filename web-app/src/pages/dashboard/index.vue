@@ -2,12 +2,7 @@
   <div class="my-8 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center px-2">
     <div class="md:flex md:place-content-between">
       <h2 class="text-[1.7rem] uppercase">Registered Disciples</h2>
-      <button
-        class="py-2 px-4 place-items-center text-[0.875rem] bg-sky-500 hover:bg-sky-400 rounded-sm text-white hover:cursor-pointer font-[500]"
-      >
-        <i class="pi pi-plus mr-1" />
-        New
-      </button>
+      <Add />
     </div>
     <div class="rounded-lg shadow-lg p-4 mt-6">
       <table>
@@ -25,7 +20,7 @@
           <td class="custom-hide">{{ fullNetworkString(data?.network) }}</td>
           <td class="text-right custom-hide">
             <button>
-              <i class="pi pi-ellipsis-v cursor-pointer rounded-full p-2 hover:bg-gray-100" />
+              <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200" />
             </button>
           </td>
 
@@ -35,7 +30,7 @@
               <span class="font-[100] text-[0.775rem]">{{ fullNetworkString(data?.network) }}</span>
             </div>
             <button class="absolute right-1">
-              <i class="pi pi-ellipsis-v cursor-pointer rounded-full p-2 hover:bg-gray-100" />
+              <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200" />
             </button>
           </td>
         </tr>
@@ -45,6 +40,7 @@
 </template>
 
 <script setup>
+import Add from './actions/add.vue'
 import { ref, onBeforeMount, computed } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()

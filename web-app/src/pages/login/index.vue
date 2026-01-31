@@ -4,7 +4,7 @@
       <form @submit.prevent="onSubmit()">
         <input type="text" v-model="code" required placeholder="Input your code" />
         <button
-          class="bg-sky-500 hover:bg-sky-400 mt-3 py-2 px-4 rounded-sm text-white hover:cursor-pointer font-[500] w-full"
+          class="bg-sky-500 hover:bg-sky-400 mt-3 py-2 px-4 rounded-sm text-white font-[500] w-full"
         >
           Submit
         </button>
@@ -37,12 +37,3 @@ function onSubmit() {
   }
 }
 </script>
-
-<style scoped>
-input {
-  width: 100%;
-  border: 1px solid gray;
-  border-radius: 5px;
-  padding: 10px;
-}
-</style>

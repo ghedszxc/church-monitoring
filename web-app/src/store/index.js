@@ -8,7 +8,6 @@ export default createStore({
     // },
 
     reconstructMenus: (state) => {
-      console.log('GETTERS: ', localStorage.getItem('isAuthenticated'))
       if (localStorage.getItem('isAuthenticated') == 'true') {
         state.menus[4] = {
           text: '',
@@ -108,7 +107,9 @@ export default createStore({
             : [],
       })
 
-      document.getElementById('dropdown_menu').style.visibility = 'hidden'
+      if (document?.getElementById('dropdown_menu')?.style?.visibility) {
+        document.getElementById('dropdown_menu').style.visibility = 'hidden'
+      }
     },
   },
 })

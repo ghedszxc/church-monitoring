@@ -21,7 +21,7 @@
           </a>
           <button v-else @click="onUpdateDropdown()" class="relative">
             <i
-              :class="`${isAuthenticated == 'false' || isAuthenticated == null ? item.icon : 'pi pi-angle-down'} p-2 border hover:border-gray-400 hover:bg-gray-0 rounded-full cursor-pointer bg-gray-100 border-gray-200`"
+              :class="`${isAuthenticated == 'false' || isAuthenticated == null ? item.icon : 'pi pi-angle-down'} p-2 border hover:border-gray-400 hover:bg-gray-0 rounded-full bg-gray-100 border-gray-200`"
             />
 
             <div id="dropdown_menu" class="custom-dropdown-menu">
@@ -42,7 +42,7 @@
       </div>
       <div class="inline lg:hidden mr-4">
         <button @click="updateNavDrawer()">
-          <i class="pi pi-bars rounded-full p-3 hover:bg-slate-100 hover:cursor-pointer"></i>
+          <i class="pi pi-bars rounded-full p-3 hover:bg-slate-100"></i>
         </button>
       </div>
     </div>
