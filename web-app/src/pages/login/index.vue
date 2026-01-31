@@ -21,10 +21,10 @@ const router = useRouter()
 
 const code = ref('')
 
-// onBeforeMount(() => {
-//   const validateAuth = localStorage.getItem('isAuthenticated')
-//   if (validateAuth) router.push('/dashboard')
-// })
+onBeforeMount(() => {
+  const validateAuth = localStorage.getItem('isAuthenticated')
+  if (validateAuth == 'true') router.push('/dashboard') // To check if user is authenticated; if YES: redirect to dashboard
+})
 
 function onSubmit() {
   if (code.value == 'vc') {

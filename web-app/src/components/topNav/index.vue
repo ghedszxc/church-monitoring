@@ -19,10 +19,24 @@
           >
             {{ item?.text }}
           </a>
-          <button v-else @click="onTrigger(item?.url)">
+          <button v-else @click="onUpdateDropdown()" class="relative">
             <i
-              :class="`${isAuthenticated == 'false' || isAuthenticated == null ? item.icon : 'pi pi-sign-out'} p-2 border hover:border-gray-400 hover:bg-gray-0 rounded-full cursor-pointer bg-gray-100 border-gray-200`"
+              :class="`${isAuthenticated == 'false' || isAuthenticated == null ? item.icon : 'pi pi-angle-down'} p-2 border hover:border-gray-400 hover:bg-gray-0 rounded-full cursor-pointer bg-gray-100 border-gray-200`"
             />
+
+            <div id="dropdown_menu" class="custom-dropdown-menu">
+              <ul class="bg-white border border-gray-300 w-30 text-left mt-1">
+                <template v-for="(subItem, key_1) in item?.subLinks" :key="key_1">
+                  <li
+                    :class="`py-2 px-3 hover:cursor-pointer hover:bg-gray-100 ${key_1 < item?.subLinks?.length - 1 && 'border-b border-gray-300'}`"
+                    @click="onRedirect(subItem)"
+                  >
+                    <i v-if="subItem?.icon" :class="`${subItem?.icon} text-[0.75rem] mr-1`" />
+                    {{ subItem?.text }}
+                  </li>
+                </template>
+              </ul>
+            </div>
           </button>
         </template>
       </div>
@@ -34,6 +48,7 @@
     </div>
   </nav>
 
+  <!-- NAV DRAWER -->
   <div class="custom-nav-drawer">
     <button @click="updateNavDrawer()" class="text-white mt-2">
       <i
@@ -52,6 +67,26 @@
           >
             {{ item?.text }}
           </a>
+
+          <template v-else v-for="(subItem, key_1) in item?.subLinks" :key="key_1">
+            <a
+              v-if="subItem.action != 'logout'"
+              :href="subItem.url"
+              :class="`grid font-[100] text-white py-1 my-1 ${$route.path == subItem.url && 'border-l-3 border-white pl-2 pb-1'}`"
+            >
+              <span>
+                <i v-if="subItem?.icon" :class="`${subItem?.icon} text-[0.75rem] mr-1`" />
+                {{ subItem?.text }}
+              </span>
+            </a>
+
+            <button v-else @click="onRedirect(subItem)" class="font-[100] text-white">
+              <span>
+                <i v-if="subItem?.icon" :class="`${subItem?.icon} text-[0.75rem] mr-1`" />
+                {{ subItem?.text }}
+              </span>
+            </button>
+          </template>
         </li>
       </ul>
     </div>
@@ -61,6 +96,9 @@
 <script setup>
 import { onBeforeMount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 const router = useRouter()
 
@@ -94,15 +132,25 @@ const menus = ref([
 ])
 
 onBeforeMount(() => {
-  console.log(window.location.pathname)
-  if (window.location.pathname == '/dashboard') {
-    menus.value.push({
-      text: 'Dashboard',
-      url: '/dashboard',
-      isExternal: false,
-    })
+  const validateAuth = localStorage.getItem('isAuthenticated')
+  // console.log('topnav: ', validateAuth)
+
+  if (validateAuth == 'true') {
+    menus.value[4].subLinks = [
+      {
+        text: 'Dashboard',
+        action: 'redirect',
+        url: '/dashboard',
+        icon: '',
+      },
+      {
+        text: 'Log Out',
+        action: 'logout',
+        url: '',
+        icon: 'pi pi-sign-out',
+      },
+    ]
   }
-  // console.log(route.path)
 })
 
 const isAuthenticated = ref(localStorage?.getItem('isAuthenticated'))
@@ -125,6 +173,33 @@ function updateNavDrawer() {
   customNavDrawer.style.visibility = 'visible'
   customNavDrawer.style.transform = `translateX(${displayNavDrawer.value ? 0 : '300px'})`
 }
+
+function onUpdateDropdown() {
+  const dropdownMenu = document.getElementById('dropdown_menu')
+  dropdownMenu.style.visibility =
+    !dropdownMenu.style.visibility || dropdownMenu.style.visibility == 'hidden'
+      ? 'visible'
+      : 'hidden'
+}
+
+function onRedirect(data) {
+  if (data.action == 'redirect') {
+    router.push(data.url)
+  } else if (data.action == 'logout') {
+    localStorage.setItem('isAuthenticated', false)
+    router.push('/login')
+    updateNavDrawer()
+
+    menus.value[4] = {
+      text: '',
+      icon: 'pi pi-user',
+      url: '/login',
+      isExternal: false,
+    }
+
+    alert('Logged out!')
+  }
+}
 </script>
 
 <style scoped>
@@ -145,5 +220,10 @@ function updateNavDrawer() {
   div {
     margin-left: 20px;
   }
+}
+
+.custom-dropdown-menu {
+  visibility: hidden;
+  position: fixed;
 }
 </style>
