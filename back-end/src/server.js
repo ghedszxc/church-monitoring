@@ -7,13 +7,14 @@ const PORT = 3000;
 
 // Routes
 const user = require("./routes/user");
-// const post = require("./routes/post");
+const disciple = require("./routes/disciple");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", user);
-// app.use("/post", post);
+app.use("/api/disciples", disciple);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
