@@ -1,7 +1,8 @@
 <template>
   <div>
     <h2 class="text-[1.7rem] uppercase">Birthday Celebrants</h2>
-    <div class="mt-2">
+
+    <div class="mt-2" v-if="sortedCelebrants?.length">
       <template v-for="(data, key) in sortedCelebrants" :key="key">
         <div
           :class="` border-l-4 mb-2 p-2 ${key % 2 === 0 ? 'bg-slate-50 border-slate-400' : 'bg-sky-50 border-sky-400'}`"
@@ -23,12 +24,18 @@
         </div>
       </template>
     </div>
+    <div v-else class="bg-slate-50 p-3 border-l-4 border-slate-400">
+      <i>No celebrant for this week</i>
+    </div>
   </div>
 </template>
 
 <script setup>
 import moment from 'moment'
 import { ref, onMounted, computed } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 const today = ref(new Date())
 const weekDates = ref([])
@@ -45,12 +52,13 @@ const celebrants = ref([
 
 onMounted(async () => {
   getDatesForCurrentWeek()
+  store.dispatch('GET_BIRTHDAY_CELEBRANTS')
 })
 
 const sortedCelebrants = computed(() => {
   weekDates.value.map((data) => {
-    data.celebrants = celebrants.value.filter((filter) => {
-      return new Date(filter.birthdate).toLocaleDateString().slice(0, 4) == data.date.slice(0, 4)
+    data.celebrants = store.state.birthdayCelebrants.filter((celebrant) => {
+      return new Date(celebrant.birthdate).toLocaleDateString().slice(0, 4) == data.date.slice(0, 4)
     })
   })
 
@@ -127,10 +135,3 @@ function getThisWeeksBirthdays() {
   })
 }
 </script>
-
-<style scoped>
-/* li:hover {
-  background-color: red;
-  cursor: pointer;
-} */
-</style>

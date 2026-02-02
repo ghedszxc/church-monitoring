@@ -67,6 +67,7 @@ export default createStore({
     ],
 
     disciples: [],
+    birthdayCelebrants: [],
   },
   mutations: {
     updateTheme(state, payload) {
@@ -78,6 +79,9 @@ export default createStore({
 
     populateDiscipleList(state, payload) {
       state.disciples = payload
+    },
+    populateBirthdayCelebrants(state, payload) {
+      state.birthdayCelebrants = payload
     },
   },
   actions: {
@@ -114,6 +118,16 @@ export default createStore({
       try {
         const response = await fetch('https://vc-bocaue-be.vercel.app/api/disciple')
         context.commit('populateDiscipleList', await response.json())
+      } catch (err) {
+        throw new Error(err?.message)
+      }
+    },
+    async GET_BIRTHDAY_CELEBRANTS(context) {
+      try {
+        const response = await fetch(
+          'https://vc-bocaue-be.vercel.app/api/disciple/birthday/celebrants',
+        )
+        context.commit('populateBirthdayCelebrants', await response.json())
       } catch (err) {
         throw new Error(err?.message)
       }
