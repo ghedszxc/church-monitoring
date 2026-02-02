@@ -2,11 +2,6 @@ import { createStore } from 'vuex'
 
 export default createStore({
   getters: {
-    // doubleCount: (state) => state.count * 2,
-    // validate_isAuthenticated: (state) => {
-    //   state.global_isAuthenticated = localStorage.getItem('isAuthenticated') != 'false'
-    // },
-
     reconstructMenus: (state) => {
       if (localStorage.getItem('isAuthenticated') == 'true') {
         state.menus[4] = {
@@ -41,8 +36,6 @@ export default createStore({
   },
   state: {
     theme: 'dark',
-    // global_isAuthenticated: false,
-
     menus: [
       {
         text: 'Home',
@@ -72,6 +65,8 @@ export default createStore({
         subLinks: [],
       },
     ],
+
+    disciples: [],
   },
   mutations: {
     updateTheme(state, payload) {
@@ -79,6 +74,10 @@ export default createStore({
     },
     updateSubLinks(state, payload) {
       state.menus[payload.key].subLinks = payload.data
+    },
+
+    populateDiscipleList(state, payload) {
+      state.disciples = payload
     },
   },
   actions: {
@@ -109,6 +108,14 @@ export default createStore({
 
       if (document?.getElementById('dropdown_menu')?.style?.visibility) {
         document.getElementById('dropdown_menu').style.visibility = 'hidden'
+      }
+    },
+    async GET_DISCIPLES_LIST(context) {
+      try {
+        const response = await fetch('https://vc-bocaue-be.vercel.app/api/disciple')
+        context.commit('populateDiscipleList', await response.json())
+      } catch (err) {
+        throw new Error(err?.message)
       }
     },
   },

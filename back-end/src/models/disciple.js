@@ -28,6 +28,13 @@ class Disciple {
     return result.insertId;
   }
 
+  static async getBirthdayCelebrants() {
+    const [rows] = await pool.execute(
+      "SELECT * FROM disciples WHERE DATE(birthdate + INTERVAL (YEAR(NOW()) - YEAR(birthdate)) YEAR) BETWEEN DATE(NOW() - INTERVAL WEEKDAY(NOW()) + 1 DAY) AND DATE(NOW() + INTERVAL 5 - WEEKDAY(NOW()) DAY)",
+    );
+    return rows;
+  }
+
   // Add more methods for update, delete, etc.
 }
 

@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/disciples", disciple);
+app.use("/api/disciple", disciple);
 
 app.get("/", (req, res) => {
   res.send("Hello World!!!! <333");

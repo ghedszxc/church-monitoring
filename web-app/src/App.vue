@@ -10,7 +10,7 @@ import TopNav from '@/components/topNav/index.vue'
 
 const route = useRoute()
 
-onMounted(() => {
+onMounted(async () => {
   // To check if user is authenticated at first load of page
   if (localStorage.getItem('isAuthenticated') == null)
     localStorage.setItem('isAuthenticated', false)

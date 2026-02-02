@@ -12,7 +12,7 @@
           <th></th>
         </tr>
         <tr
-          v-for="(data, key) in disciples"
+          v-for="(data, key) in store.state.disciples"
           :key="key"
           :class="`text-[0.875rem] border-b border-gray-100 ${key % 2 === 0 && 'bg-slate-50'}`"
         >
@@ -43,17 +43,10 @@
 import Add from './actions/add.vue'
 import { ref, onBeforeMount, computed } from 'vue'
 import { useRouter } from 'vue-router'
-const router = useRouter()
+import { useStore } from 'vuex'
 
-const disciples = ref([
-  {
-    givenName: 'Gerard',
-    surname: 'Mendiola',
-    network: 'M',
-  },
-  { givenName: 'Hana', surname: 'Mendiola', network: 'YW' },
-  { givenName: 'Darwin', surname: 'Bading', network: 'YM' },
-])
+const store = useStore()
+const router = useRouter()
 
 const fullNetworkString = computed(() => {
   const networks = {
@@ -71,6 +64,8 @@ const fullNetworkString = computed(() => {
 onBeforeMount(() => {
   const validateAuth = localStorage.getItem('isAuthenticated')
   router.push(`${validateAuth == 'true' ? '/dashboard' : '/login'}`)
+
+  store.dispatch('GET_DISCIPLES_LIST')
 })
 </script>
 
@@ -97,10 +92,4 @@ td {
     display: flex;
   }
 }
-/* input {
-  width: 100%;
-  border: 1px solid gray;
-  border-radius: 5px;
-  padding: 10px;
-} */
 </style>

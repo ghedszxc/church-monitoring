@@ -48,6 +48,16 @@ class DiscipleController {
       res.status(500).json({ error: error?.message });
     }
   }
+
+  static async getBirthdayCelebrants(req, res) {
+    try {
+      const celebrants = await Disciple.getBirthdayCelebrants();
+      res.json(celebrants);
+    } catch (error) {
+      console.error("Error fetching birthday celebrants:", error);
+      res.status(500).json({ error: error?.message });
+    }
+  }
 }
 
 module.exports = DiscipleController;

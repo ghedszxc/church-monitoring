@@ -8,5 +8,6 @@ router.get("/:id", DiscipleController.getDisciple);
 router.post("/", DiscipleController.createDisciple);
 // router.put('/:id', DiscipleController.updateDisciple);
 // router.delete('/:id', DiscipleController.deleteDisciple);
+router.get("/birthday/celebrants", DiscipleController.getBirthdayCelebrants);
 
 module.exports = router;
