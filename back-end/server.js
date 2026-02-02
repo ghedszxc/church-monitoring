@@ -1,7 +1,19 @@
+// const express = require("express");
+// const app = express();
+// const PORT = 3000;
+
+// app.listen(PORT, () => {
+//   console.log(`Server running on http://localhost:${PORT}`);
+// });
+
 const express = require("express");
 const app = express();
-const PORT = 3000;
+const port = 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
 });
