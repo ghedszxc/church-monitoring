@@ -14,9 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/disciples", disciple);
 
-// app.get("/", (req, res) => {
-//   res.send("Hello World!!!! :DDDD");
-// });
+app.get("/", (req, res) => {
+  res.send("Hello World!!!! ????");
+});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
