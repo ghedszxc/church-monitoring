@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use("/api/disciples", disciple);
 
 app.get("/", (req, res) => {
-  res.send("Hello World! nani!");
+  res.send("Hello World!!!!");
 });
 
 app.listen(port, () => {
