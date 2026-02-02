@@ -6,8 +6,8 @@ const app = express();
 const PORT = 3000;
 
 // Routes
-const user = require("./routes/user");
-const disciple = require("./routes/disciple");
+const user = require("./src/routes/user");
+const disciple = require("./src/routes/disciple");
 
 app.use(cors());
 app.use(express.json());
