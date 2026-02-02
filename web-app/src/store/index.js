@@ -65,6 +65,7 @@ export default createStore({
         subLinks: [],
       },
     ],
+    loading: true,
 
     disciples: [],
     birthdayCelebrants: [],
@@ -75,6 +76,9 @@ export default createStore({
     },
     updateSubLinks(state, payload) {
       state.menus[payload.key].subLinks = payload.data
+    },
+    updateLoading(state, payload) {
+      state.loading = payload
     },
 
     populateDiscipleList(state, payload) {
@@ -115,14 +119,19 @@ export default createStore({
       }
     },
     async GET_DISCIPLES_LIST(context) {
+      context.commit('updateLoading', true)
       try {
         const response = await fetch('https://vc-bocaue-be.vercel.app/api/disciple')
         context.commit('populateDiscipleList', await response.json())
       } catch (err) {
         throw new Error(err?.message)
+      } finally {
+        context.commit('updateLoading', false)
       }
     },
     async GET_BIRTHDAY_CELEBRANTS(context) {
+      context.commit('updateLoading', true)
+
       try {
         const response = await fetch(
           'https://vc-bocaue-be.vercel.app/api/disciple/birthday/celebrants',
@@ -130,6 +139,8 @@ export default createStore({
         context.commit('populateBirthdayCelebrants', await response.json())
       } catch (err) {
         throw new Error(err?.message)
+      } finally {
+        context.commit('updateLoading', false)
       }
     },
   },

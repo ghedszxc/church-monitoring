@@ -5,7 +5,7 @@
       <Add />
     </div>
     <div class="rounded-lg shadow-lg p-4 mt-6">
-      <table>
+      <table v-if="!store.state.loading">
         <tr class="text-left border-b border-gray-200 custom-hide">
           <th>Name</th>
           <th>Network</th>
@@ -35,6 +35,9 @@
           </td>
         </tr>
       </table>
+      <div v-else class="text-center font-[100]">
+        <span>Loading ...</span>
+      </div>
     </div>
   </div>
 </template>

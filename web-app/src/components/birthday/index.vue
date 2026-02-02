@@ -2,30 +2,36 @@
   <div>
     <h2 class="text-[1.7rem] uppercase">Birthday Celebrants</h2>
 
-    <div class="mt-2" v-if="sortedCelebrants?.length">
-      <template v-for="(data, key) in sortedCelebrants" :key="key">
-        <div
-          :class="` border-l-4 mb-2 p-2 ${key % 2 === 0 ? 'bg-slate-50 border-slate-400' : 'bg-sky-50 border-sky-400'}`"
-        >
-          <strong> {{ dateFormat(data.date) }}</strong>
+    <div v-if="!store.state.loading">
+      <div class="mt-2" v-if="sortedCelebrants?.length">
+        <template v-for="(data, key) in sortedCelebrants" :key="key">
+          <div
+            :class="` border-l-4 mb-2 p-2 ${key % 2 === 0 ? 'bg-slate-50 border-slate-400' : 'bg-sky-50 border-sky-400'}`"
+          >
+            <strong> {{ dateFormat(data.date) }}</strong>
 
-          <ul class="mt-2">
-            <li
-              v-for="(subData, key_1) in data?.celebrants"
-              :key="key_1"
-              :class="`${data?.celebrants?.length > 1 && 'list-decimal'} list-inside font-[100]`"
-            >
-              {{ `${subData?.givenName} ${subData?.surname}` }}
-              <span class="text-[0.875rem] text-gray-500"
-                >({{ `${currentAge(subData.birthdate)} yrs old` }})</span
+            <ul class="mt-2">
+              <li
+                v-for="(subData, key_1) in data?.celebrants"
+                :key="key_1"
+                :class="`${data?.celebrants?.length > 1 && 'list-decimal'} list-inside font-[100]`"
               >
-            </li>
-          </ul>
-        </div>
-      </template>
+                {{ `${subData?.givenName} ${subData?.surname}` }}
+                <span class="text-[0.875rem] text-gray-500"
+                  >({{ `${currentAge(subData.birthdate)} yrs old` }})</span
+                >
+              </li>
+            </ul>
+          </div>
+        </template>
+      </div>
+      <div v-else class="bg-slate-50 p-3 border-l-4 border-slate-400 font-[100]">
+        <span>No celebrant for this week</span>
+      </div>
     </div>
-    <div v-else class="bg-slate-50 p-3 border-l-4 border-slate-400">
-      <i>No celebrant for this week</i>
+
+    <div v-else class="text-center font-[100] bg-slate-50 p-3">
+      <span>Loading ...</span>
     </div>
   </div>
 </template>
