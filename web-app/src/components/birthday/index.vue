@@ -63,9 +63,13 @@ onMounted(async () => {
 
 const sortedCelebrants = computed(() => {
   weekDates.value.map((data) => {
-    data.celebrants = store.state.birthdayCelebrants.filter((celebrant) => {
-      return new Date(celebrant.birthdate).toLocaleDateString().slice(0, 4) == data.date.slice(0, 4)
-    })
+    if (!store.state.birthdayCelebrants?.error) {
+      data.celebrants = store.state.birthdayCelebrants.filter((celebrant) => {
+        return (
+          new Date(celebrant.birthdate).toLocaleDateString().slice(0, 4) == data.date.slice(0, 4)
+        )
+      })
+    }
   })
 
   return weekDates.value.filter((filter) => {
