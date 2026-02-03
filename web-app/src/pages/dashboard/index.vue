@@ -2,7 +2,10 @@
   <div class="my-8 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center px-2">
     <div class="md:flex md:place-content-between">
       <h2 class="text-[1.7rem] uppercase">Registered Disciples</h2>
-      <Add />
+      <div>
+        <Add />
+        <AddMultiple />
+      </div>
     </div>
     <div class="rounded-lg shadow-lg p-4 mt-6">
       <table v-if="!store.state.loading">
@@ -44,6 +47,8 @@
 
 <script setup>
 import Add from './actions/add.vue'
+import AddMultiple from './actions/addMultiple.vue'
+
 import { ref, onBeforeMount, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'

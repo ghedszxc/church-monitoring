@@ -26,22 +26,45 @@ class DiscipleController {
   }
 
   static async createDisciple(req, res) {
-    try {
-      const { givenName, middleName, surname, network, birthdate, status } =
-        req.body;
+    // try {
+    //   const { givenName, middleName, surname, network, birthdate, status } =
+    //     req.body;
+    //   const newDiscipleId = await Disciple.createDisciple(
+    //     givenName,
+    //     middleName,
+    //     surname,
+    //     network,
+    //     birthdate,
+    //     status,
+    //   );
+    //   res.status(201).json({
+    //     id: newDiscipleId,
+    //     message: `${givenName} ${surname} is successfully added from disciple list`,
+    //   });
+    // } catch (error) {
+    //   console.error("Error creating disciple:", error);
+    //   res.status(500).json({ error: error?.message });
+    // }
+  }
 
-      const newDiscipleId = await Disciple.createDisciple(
-        givenName,
-        middleName,
-        surname,
-        network,
-        birthdate,
-        status,
-      );
+  static async addMultipleDisciples(req, res) {
+    try {
+      req.body.map((payload) => {
+        const { givenName, middleName, surname, network, birthdate, status } =
+          payload;
+
+        Disciple.createDisciple(
+          givenName,
+          middleName,
+          surname,
+          network,
+          birthdate,
+          status,
+        );
+      });
 
       res.status(201).json({
-        id: newDiscipleId,
-        message: `${givenName} ${surname} is successfully added from disciple list`,
+        message: `Successfully added multiple people from disciple list`,
       });
     } catch (error) {
       console.error("Error creating disciple:", error);

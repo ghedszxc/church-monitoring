@@ -66,6 +66,7 @@ export default createStore({
       },
     ],
     loading: true,
+    loadingMultipleAdd: false,
 
     disciples: [],
     birthdayCelebrants: [],
@@ -83,6 +84,11 @@ export default createStore({
 
     populateDiscipleList(state, payload) {
       state.disciples = payload
+    },
+    pushToDiscipleList(state, payload) {
+      payload.map((people) => {
+        state.disciples.push(people)
+      })
     },
     populateBirthdayCelebrants(state, payload) {
       state.birthdayCelebrants = payload
@@ -137,6 +143,25 @@ export default createStore({
           'https://vc-bocaue-be.vercel.app/api/disciple/birthday/celebrants',
         )
         context.commit('populateBirthdayCelebrants', await response.json())
+      } catch (err) {
+        throw new Error(err?.message)
+      } finally {
+        context.commit('updateLoading', false)
+      }
+    },
+    async ADD_MULTIPLE_DISCIPLES(context, payload) {
+      context.commit('updateLoading', true)
+
+      try {
+        const response = await fetch('http://localhost:3000/api/disciple/add/multiple/disciples', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        })
+
+        context.commit('pushToDiscipleList', payload)
       } catch (err) {
         throw new Error(err?.message)
       } finally {
