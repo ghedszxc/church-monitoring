@@ -48,27 +48,76 @@ class DiscipleController {
   }
 
   static async addMultipleDisciples(req, res) {
+    const result = [];
+
     try {
       req.body.map((payload) => {
         const { givenName, middleName, surname, network, birthdate, status } =
           payload;
 
-        Disciple.createDisciple(
-          givenName,
-          middleName,
-          surname,
-          network,
-          birthdate,
-          status,
+        const slashFormat = birthdate.split(
+          birthdate.includes("/") ? "/" : "-",
         );
-      });
 
-      res.status(201).json({
-        message: `Successfully added multiple people from disciple list`,
+        const formattedBirthdate = `${slashFormat[2]}-${slashFormat[1]}-${slashFormat[0]}`;
+
+        // note: to fix in future, have a global function to handle capitalization of names
+        const lowercasedGivenName = givenName.toLowerCase();
+        const capitalizedGivenName = lowercasedGivenName
+          .split(" ")
+          .map((word) => {
+            return word.length > 0
+              ? word.charAt(0).toUpperCase() + word.slice(1)
+              : word;
+          })
+          .join(" ");
+
+        const lowercasedMiddleName = middleName.toLowerCase();
+        const capitalizedMiddleName = lowercasedMiddleName
+          .split(" ")
+          .map((word) => {
+            return word.length > 0
+              ? word.charAt(0).toUpperCase() + word.slice(1)
+              : word;
+          })
+          .join(" ");
+
+        const lowercasedSurname = surname.toLowerCase();
+        const capitalizedSurname = lowercasedSurname
+          .split(" ")
+          .map((word) => {
+            return word.length > 0
+              ? word.charAt(0).toUpperCase() + word.slice(1)
+              : word;
+          })
+          .join(" ");
+
+        Disciple.createDisciple(
+          capitalizedGivenName,
+          capitalizedMiddleName,
+          capitalizedSurname,
+          network.toUpperCase(),
+          formattedBirthdate,
+          status.toUpperCase(),
+        );
+
+        result.push({
+          givenName: capitalizedGivenName,
+          middleName: capitalizedMiddleName,
+          surname: capitalizedSurname,
+          network: network.toUpperCase(),
+          birthdate: formattedBirthdate,
+          status: status.toUpperCase(),
+        });
       });
     } catch (error) {
       console.error("Error creating disciple:", error);
       res.status(500).json({ error: error?.message });
+    } finally {
+      res.status(201).json({
+        message: `Successfully added multiple people from disciple list`,
+        result,
+      });
     }
   }
 

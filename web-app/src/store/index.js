@@ -65,8 +65,14 @@ export default createStore({
         subLinks: [],
       },
     ],
+
+    snackbar: {
+      color: '',
+      msg: '',
+      timeout: 0,
+    },
+
     loading: true,
-    loadingMultipleAdd: false,
 
     disciples: [],
     birthdayCelebrants: [],
@@ -80,6 +86,9 @@ export default createStore({
     },
     updateLoading(state, payload) {
       state.loading = payload
+    },
+    updateSnackbar(state, payload) {
+      state.snackbar = payload
     },
 
     populateDiscipleList(state, payload) {
@@ -161,7 +170,14 @@ export default createStore({
           body: JSON.stringify(payload),
         })
 
-        context.commit('pushToDiscipleList', payload)
+        const { message, result } = await response.json()
+        context.commit('pushToDiscipleList', result)
+
+        context.commit('updateSnackbar', {
+          color: 'success',
+          msg: message,
+          timeout: 3000,
+        })
       } catch (err) {
         throw new Error(err?.message)
       } finally {

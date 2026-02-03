@@ -1,7 +1,7 @@
 <template>
   <div class="my-8 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center px-2">
     <div class="md:flex md:place-content-between">
-      <h2 class="text-[1.7rem] uppercase">Registered Disciples</h2>
+      <h2 class="text-[1.7rem]">Registered Disciples</h2>
       <div>
         <Add />
         <AddMultiple />
@@ -9,34 +9,40 @@
     </div>
     <div class="rounded-lg shadow-lg p-4 mt-6">
       <table v-if="!store.state.loading">
-        <tr class="text-left border-b border-gray-200 custom-hide">
-          <th>Name</th>
-          <th>Network</th>
-          <th></th>
-        </tr>
-        <tr
-          v-for="(data, key) in store.state.disciples"
-          :key="key"
-          :class="`text-[0.875rem] border-b border-gray-100 ${key % 2 === 0 && 'bg-slate-50'}`"
-        >
-          <td class="custom-hide">{{ `${data?.surname}, ${data?.givenName}` }}</td>
-          <td class="custom-hide">{{ fullNetworkString(data?.network) }}</td>
-          <td class="text-right custom-hide">
-            <button>
-              <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200" />
-            </button>
-          </td>
+        <thead>
+          <tr class="text-left border-b border-gray-200 custom-hide">
+            <th>Name</th>
+            <th>Network</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(data, key) in store.state.disciples"
+            :key="key"
+            :class="`text-[0.875rem] border-b border-gray-100 ${key % 2 === 0 && 'bg-slate-50'}`"
+          >
+            <td class="custom-hide">{{ `${data?.surname}, ${data?.givenName}` }}</td>
+            <td class="custom-hide">{{ fullNetworkString(data?.network) }}</td>
+            <td class="text-right custom-hide">
+              <button>
+                <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200" />
+              </button>
+            </td>
 
-          <td class="flex relative custom-mobile-only">
-            <div class="grid">
-              <strong>{{ `${data?.surname}, ${data?.givenName}` }}</strong>
-              <span class="font-[100] text-[0.775rem]">{{ fullNetworkString(data?.network) }}</span>
-            </div>
-            <button class="absolute right-1">
-              <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200" />
-            </button>
-          </td>
-        </tr>
+            <td class="flex relative custom-mobile-only">
+              <div class="grid">
+                <strong>{{ `${data?.surname}, ${data?.givenName}` }}</strong>
+                <span class="font-[100] text-[0.775rem]">{{
+                  fullNetworkString(data?.network)
+                }}</span>
+              </div>
+              <button class="absolute right-1">
+                <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
       </table>
       <div v-else class="text-center font-[100]">
         <span>Loading ...</span>
