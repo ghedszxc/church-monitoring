@@ -6,7 +6,7 @@
       <div class="mt-2" v-if="sortedCelebrants?.length">
         <template v-for="(data, key) in sortedCelebrants" :key="key">
           <div
-            :class="` border-l-4 mb-2 p-2 ${key % 2 === 0 ? 'bg-slate-50 border-slate-400' : 'bg-sky-50 border-sky-400'}`"
+            :class="` border-l-4 mb-2 p-2 ${key % 2 === 0 ? 'bg-slate-50 dark:bg-gray-800 border-slate-400 dark:border-gray-500' : 'bg-sky-50 dark:bg-gray-700 border-sky-400 dark:border-sky-600'}`"
           >
             <strong> {{ dateFormat(data.date) }}</strong>
 
@@ -17,7 +17,7 @@
                 :class="`${data?.celebrants?.length > 1 && 'list-decimal'} list-inside font-[100]`"
               >
                 {{ `${subData?.givenName} ${subData?.surname}` }}
-                <span class="text-[0.875rem] text-gray-500"
+                <span class="text-[0.875rem] text-gray-500 dark:text-gray-400"
                   >({{ `${currentAge(subData.birthdate)} yrs old` }})</span
                 >
               </li>
@@ -25,12 +25,12 @@
           </div>
         </template>
       </div>
-      <div v-else class="bg-slate-50 p-3 border-l-4 border-slate-400 font-[100]">
+      <div v-else class="bg-slate-50 dark:bg-gray-800 p-3 border-l-4 border-slate-400 dark:border-gray-500 font-[100]">
         <span>No celebrant for this week</span>
       </div>
     </div>
 
-    <div v-else class="text-center font-[100] bg-slate-50 p-3">
+    <div v-else class="text-center font-[100] bg-slate-50 dark:bg-gray-800 p-3">
       <span>Loading ...</span>
     </div>
   </div>

@@ -104,6 +104,10 @@ function onAddDisciple() {
 
   border-radius: 5px;
 
+  .dark & {
+    background-color: #1f2937;
+  }
+
   /* small desktop */
   @media screen and (max-width: 1024px) {
     width: 40vw;

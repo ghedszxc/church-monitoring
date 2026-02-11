@@ -35,7 +35,7 @@ export default createStore({
     },
   },
   state: {
-    theme: 'dark',
+    theme: localStorage.getItem('theme') || 'light',
     menus: [
       {
         text: 'Home',
@@ -105,6 +105,7 @@ export default createStore({
   },
   actions: {
     UPDATE_THEME(context, payload) {
+      localStorage.setItem('theme', payload)
       context.commit('updateTheme', payload)
     },
     UPDATE_MENU_FOR_USER(context, payload) {

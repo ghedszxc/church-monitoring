@@ -1,10 +1,10 @@
 <template>
-  <nav class="h-[4rem] lg:h-[5rem] flex border-b border-gray-100">
+  <nav class="h-[4rem] lg:h-[5rem] flex border-b border-gray-100 dark:border-gray-700 dark:bg-gray-900 transition-colors duration-300">
     <div class="flex-1 place-content-end">
       <img
         src="/src/assets/images/logo.jpg"
         alt="logo"
-        class="place-self-start lg:place-self-end h-full w-auto cursor-pointer"
+        class="place-self-start lg:place-self-end h-full w-auto cursor-pointer mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:rounded-lg p-1"
         @click="router.push('/')"
       />
     </div>
@@ -21,14 +21,14 @@
           </a>
           <button v-else @click="onUpdateDropdown()" class="relative">
             <i
-              :class="`${isAuthenticated == 'false' || isAuthenticated == null ? item.icon : 'pi pi-angle-down'} p-2 border hover:border-gray-400 hover:bg-gray-0 rounded-full bg-gray-100 border-gray-200`"
+              :class="`${isAuthenticated == 'false' || isAuthenticated == null ? item.icon : 'pi pi-angle-down'} p-2 border hover:border-gray-400 hover:bg-gray-0 rounded-full bg-gray-100 border-gray-200 dark:bg-gray-700 dark:border-gray-600`"
             />
 
             <div id="dropdown_menu" class="custom-dropdown-menu">
-              <ul class="bg-white border border-gray-300 w-30 text-left mt-1">
+              <ul class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 w-30 text-left mt-1">
                 <template v-for="(subItem, key_1) in item?.subLinks" :key="key_1">
                   <li
-                    :class="`py-2 px-3 hover:cursor-pointer hover:bg-gray-100 ${key_1 < item?.subLinks?.length - 1 && 'border-b border-gray-300'} ${$route.path == subItem.url && 'bg-red-500 text-white font-[500]'}`"
+                    :class="`py-2 px-3 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${key_1 < item?.subLinks?.length - 1 && 'border-b border-gray-300 dark:border-gray-600'} ${$route.path == subItem.url && 'bg-red-500 text-white font-[500]'}`"
                     @click="onRedirect(subItem)"
                   >
                     <i v-if="subItem?.icon" :class="`${subItem?.icon} text-[0.75rem] mr-1`" />
@@ -39,10 +39,20 @@
             </div>
           </button>
         </template>
+        <button @click="toggleTheme()" class="ml-2">
+          <i
+            :class="`pi ${store.state.theme === 'dark' ? 'pi-sun' : 'pi-moon'} p-2 border hover:border-gray-400 rounded-full bg-gray-100 border-gray-200 dark:bg-gray-700 dark:border-gray-600`"
+          />
+        </button>
       </div>
       <div class="inline lg:hidden mr-4">
+        <button @click="toggleTheme()" class="mr-1">
+          <i
+            :class="`pi ${store.state.theme === 'dark' ? 'pi-sun' : 'pi-moon'} rounded-full p-3 hover:bg-slate-100 dark:hover:bg-gray-700`"
+          />
+        </button>
         <button @click="updateNavDrawer()">
-          <i class="pi pi-bars rounded-full p-3 hover:bg-slate-100"></i>
+          <i class="pi pi-bars rounded-full p-3 hover:bg-slate-100 dark:hover:bg-gray-700"></i>
         </button>
       </div>
     </div>
@@ -154,6 +164,11 @@ function onUpdateDropdown() {
         ? 'visible'
         : 'hidden'
   }
+}
+
+function toggleTheme() {
+  const newTheme = store.state.theme === 'dark' ? 'light' : 'dark'
+  store.dispatch('UPDATE_THEME', newTheme)
 }
 
 function onRedirect(data) {

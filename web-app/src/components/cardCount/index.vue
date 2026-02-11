@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-lg shadow-lg py-4 custom-div">
+  <div class="rounded-lg shadow-lg dark:shadow-gray-700/50 py-4 custom-div dark:bg-gray-800">
     <span :id="`count_${index}`" class="text-[3rem] font-bold">
       <slot name="actualCount"></slot>
     </span>

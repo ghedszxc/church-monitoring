@@ -1,20 +1,39 @@
 <template>
-  <TopNav />
-  <RouterView />
+  <div class="min-h-screen bg-white dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <TopNav />
+    <RouterView />
+  </div>
 </template>
 
 <script setup>
 import { onMounted, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 import TopNav from '@/components/topNav/index.vue'
 
 const route = useRoute()
+const store = useStore()
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+}
 
 onMounted(async () => {
   // To check if user is authenticated at first load of page
   if (localStorage.getItem('isAuthenticated') == null)
     localStorage.setItem('isAuthenticated', false)
+
+  applyTheme(store.state.theme)
 })
+
+watch(
+  () => store.state.theme,
+  (newTheme) => applyTheme(newTheme),
+)
 
 watch(
   () => route.path,

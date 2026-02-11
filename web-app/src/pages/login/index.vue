@@ -1,6 +1,6 @@
 <template>
   <div class="my-8 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center px-2">
-    <div class="rounded-lg shadow-lg p-4 w-95 place-self-end">
+    <div class="rounded-lg shadow-lg dark:shadow-gray-700/50 p-4 w-95 place-self-end dark:bg-gray-800">
       <form @submit.prevent="onSubmit()">
         <input type="text" v-model="code" required placeholder="Input your code" />
         <button

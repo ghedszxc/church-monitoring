@@ -7,10 +7,10 @@
         <AddMultiple />
       </div>
     </div>
-    <div class="rounded-lg shadow-lg p-4 mt-6">
+    <div class="rounded-lg shadow-lg dark:shadow-gray-700/50 p-4 mt-6 dark:bg-gray-800">
       <table v-if="!store.state.loading">
         <thead>
-          <tr class="text-left border-b border-gray-200 custom-hide">
+          <tr class="text-left border-b border-gray-200 dark:border-gray-700 custom-hide">
             <th>Name</th>
             <th>Network</th>
             <th></th>
@@ -20,25 +20,25 @@
           <tr
             v-for="(data, key) in store.state.disciples"
             :key="key"
-            :class="`text-[0.875rem] border-b border-gray-100 ${key % 2 === 0 && 'bg-slate-50'}`"
+            :class="`text-[0.875rem] border-b border-gray-100 dark:border-gray-700 ${key % 2 === 0 ? 'bg-slate-50 dark:bg-gray-700' : 'dark:bg-gray-800'} hover:bg-gray-100 dark:hover:bg-gray-600`"
           >
             <td class="custom-hide">{{ `${data?.surname}, ${data?.givenName}` }}</td>
             <td class="custom-hide">{{ fullNetworkString(data?.network) }}</td>
             <td class="text-right custom-hide">
               <button>
-                <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200" />
+                <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200 dark:hover:bg-gray-600" />
               </button>
             </td>
 
             <td class="flex relative custom-mobile-only">
               <div class="grid">
                 <strong>{{ `${data?.surname}, ${data?.givenName}` }}</strong>
-                <span class="font-[100] text-[0.775rem]">{{
+                <span class="font-[100] text-[0.775rem] dark:text-gray-400">{{
                   fullNetworkString(data?.network)
                 }}</span>
               </div>
               <button class="absolute right-1">
-                <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200" />
+                <i class="pi pi-ellipsis-v rounded-full p-2 hover:bg-gray-200 dark:hover:bg-gray-600" />
               </button>
             </td>
           </tr>
