@@ -4,7 +4,7 @@
       <img
         src="/src/assets/images/logo.jpg"
         alt="logo"
-        class="place-self-start lg:place-self-end h-full w-auto cursor-pointer mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:rounded-lg p-1"
+        class="place-self-start lg:place-self-end h-[75%] w-auto cursor-pointer mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:rounded-lg my-2 ml-7 lg:ml-0"
         @click="router.push('/')"
       />
     </div>
