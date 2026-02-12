@@ -1,7 +1,10 @@
 <template>
-  <div class="min-h-screen bg-white dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <div class="flex flex-col min-h-screen bg-white dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
     <TopNav />
-    <RouterView />
+    <div class="flex-1">
+      <RouterView />
+    </div>
+    <Footer />
   </div>
 </template>
 
@@ -10,16 +13,13 @@ import { onMounted, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import TopNav from '@/components/topNav/index.vue'
+import Footer from '@/components/footer/index.vue'
 
 const route = useRoute()
 const store = useStore()
 
 function applyTheme(theme) {
-  if (theme === 'dark') {
-    document.documentElement.classList.add('dark')
-  } else {
-    document.documentElement.classList.remove('dark')
-  }
+  theme === 'dark' ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')
 }
 
 onMounted(async () => {

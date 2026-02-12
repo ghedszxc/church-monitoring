@@ -1,10 +1,10 @@
 <template>
   <div class="my-8 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center px-2">
-    <div class="rounded-lg shadow-lg dark:shadow-gray-700/50 p-4 w-95 place-self-end dark:bg-gray-800">
+    <div class="rounded-lg shadow-lg dark:shadow-gray-700/50 p-4 w-95 place-self-center dark:bg-gray-800">
       <form @submit.prevent="onSubmit()">
         <input type="text" v-model="code" required placeholder="Input your code" />
         <button
-          class="bg-sky-500 hover:bg-sky-400 mt-3 py-2 px-4 rounded-sm text-white font-[500] w-full"
+          class="bg-red-500 hover:bg-red-600 mt-3 py-2 px-4 rounded-sm text-white font-[500] w-full"
         >
           Submit
         </button>

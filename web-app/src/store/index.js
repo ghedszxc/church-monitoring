@@ -4,7 +4,7 @@ export default createStore({
   getters: {
     reconstructMenus: (state) => {
       if (localStorage.getItem('isAuthenticated') == 'true') {
-        state.menus[4] = {
+        state.menus[2] = {
           text: '',
           icon: 'pi pi-user',
           url: '/login',
@@ -25,7 +25,7 @@ export default createStore({
           ],
         }
       } else {
-        state.menus[4] = {
+        state.menus[2] = {
           text: '',
           icon: 'pi pi-user',
           url: '/login',
@@ -42,16 +42,16 @@ export default createStore({
         url: '/',
         isExternal: false,
       },
-      {
-        text: 'Social Media',
-        url: 'https://www.facebook.com/visionchurchbocaue',
-        isExternal: true,
-      },
-      {
-        text: 'About Us',
-        url: '/about-us',
-        isExternal: false,
-      },
+      // {
+      //   text: 'Social Media',
+      //   url: 'https://www.facebook.com/visionchurchbocaue',
+      //   isExternal: true,
+      // },
+      // {
+      //   text: 'About Us',
+      //   url: '/about-us',
+      //   isExternal: false,
+      // },
       {
         text: 'Contact Us',
         url: '/contact-us',

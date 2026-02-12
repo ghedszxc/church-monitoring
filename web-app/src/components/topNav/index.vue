@@ -4,7 +4,7 @@
       <img
         src="/src/assets/images/logo.jpg"
         alt="logo"
-        class="place-self-start lg:place-self-end h-[75%] w-auto cursor-pointer mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:rounded-lg my-2 ml-7 lg:ml-0"
+        class="place-self-start lg:place-self-end h-[75%] w-auto cursor-pointer mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:rounded-lg dark:p-1 my-2 ml-7 lg:ml-0"
         @click="router.push('/')"
       />
     </div>
@@ -19,7 +19,7 @@
           >
             {{ item?.text }}
           </a>
-          <button v-else @click="onUpdateDropdown()" class="relative">
+          <button v-else @click="onUpdateDropdown()" class="relative" :title="isAuthenticated == 'false' || isAuthenticated == null ? 'Login' : 'Account'">
             <i
               :class="`${isAuthenticated == 'false' || isAuthenticated == null ? item.icon : 'pi pi-angle-down'} p-2 border hover:border-gray-400 hover:bg-gray-0 rounded-full bg-gray-100 border-gray-200 dark:bg-gray-700 dark:border-gray-600`"
             />
@@ -39,19 +39,19 @@
             </div>
           </button>
         </template>
-        <button @click="toggleTheme()" class="ml-2">
+        <button @click="toggleTheme()" class="ml-2" :title="store.state.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
           <i
             :class="`pi ${store.state.theme === 'dark' ? 'pi-sun' : 'pi-moon'} p-2 border hover:border-gray-400 rounded-full bg-gray-100 border-gray-200 dark:bg-gray-700 dark:border-gray-600`"
           />
         </button>
       </div>
       <div class="inline lg:hidden mr-4">
-        <button @click="toggleTheme()" class="mr-1">
+        <button @click="toggleTheme()" class="mr-1" :title="store.state.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
           <i
             :class="`pi ${store.state.theme === 'dark' ? 'pi-sun' : 'pi-moon'} rounded-full p-3 hover:bg-slate-100 dark:hover:bg-gray-700`"
           />
         </button>
-        <button @click="updateNavDrawer()">
+        <button @click="updateNavDrawer()" title="Menu">
           <i class="pi pi-bars rounded-full p-3 hover:bg-slate-100 dark:hover:bg-gray-700"></i>
         </button>
       </div>

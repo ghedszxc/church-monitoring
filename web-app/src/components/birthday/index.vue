@@ -6,7 +6,7 @@
       <div class="mt-2" v-if="sortedCelebrants?.length">
         <template v-for="(data, key) in sortedCelebrants" :key="key">
           <div
-            :class="` border-l-4 mb-2 p-2 ${key % 2 === 0 ? 'bg-slate-50 dark:bg-gray-800 border-slate-400 dark:border-gray-500' : 'bg-sky-50 dark:bg-gray-700 border-sky-400 dark:border-sky-600'}`"
+            :class="`rounded-sm border-l-4 mb-2 p-2 ${key % 2 === 0 ? 'bg-slate-50 dark:bg-gray-800 border-slate-400 dark:border-gray-500' : 'bg-red-50 dark:bg-gray-700 border-red-300 dark:border-red-900'}`"
           >
             <strong> {{ dateFormat(data.date) }}</strong>
 
