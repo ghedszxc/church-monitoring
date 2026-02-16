@@ -2,7 +2,7 @@
   <div class="my-8 w-[95vw] lg:w-[85vw] xl:w-[60vw] place-self-center px-2">
     <div class="rounded-lg shadow-lg dark:shadow-gray-700/50 p-4 w-95 place-self-center dark:bg-gray-800">
       <form @submit.prevent="onSubmit()">
-        <input type="text" v-model="code" required placeholder="Input your code" />
+        <input type="password" v-model="code" required placeholder="Input your code" />
         <button
           class="bg-red-500 hover:bg-red-600 mt-3 py-2 px-4 rounded-sm text-white font-[500] w-full"
         >
@@ -16,8 +16,10 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 const router = useRouter()
+const store = useStore()
 
 const code = ref('')
 
@@ -29,10 +31,20 @@ onBeforeMount(() => {
 function onSubmit() {
   if (code.value == 'vc') {
     localStorage.setItem('isAuthenticated', true)
-    alert('Code is correct!')
-    router.push('/dashboard')
+    store.dispatch('SHOW_MODAL', {
+      title: 'Success',
+      message: 'Code is correct!',
+      type: 'success',
+      onClose: () => {
+        router.push('/dashboard')
+      },
+    })
   } else {
-    alert('Code is incorrect!')
+    store.dispatch('SHOW_MODAL', {
+      title: 'Error',
+      message: 'Code is incorrect!',
+      type: 'error',
+    })
     code.value = ''
   }
 }

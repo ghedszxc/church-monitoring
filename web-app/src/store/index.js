@@ -76,6 +76,15 @@ export default createStore({
 
     disciples: [],
     birthdayCelebrants: [],
+
+    modal: {
+      visible: false,
+      title: '',
+      message: '',
+      type: 'success', // 'success' | 'error' | 'info' | 'warning'
+      size: 'sm',
+      onClose: null, // optional callback function
+    },
   },
   mutations: {
     updateTheme(state, payload) {
@@ -101,6 +110,22 @@ export default createStore({
     },
     populateBirthdayCelebrants(state, payload) {
       state.birthdayCelebrants = payload
+    },
+
+    showModal(state, payload) {
+      state.modal = {
+        visible: true,
+        title: payload.title || 'Notification',
+        message: payload.message || '',
+        type: payload.type || 'success',
+        size: payload.size || 'sm',
+        onClose: payload.onClose || null,
+      }
+    },
+
+    hideModal(state) {
+      state.modal.visible = false
+      // Keep other properties for smooth transition
     },
   },
   actions: {
@@ -183,6 +208,20 @@ export default createStore({
         throw new Error(err?.message)
       } finally {
         context.commit('updateLoading', false)
+      }
+    },
+
+    SHOW_MODAL(context, payload) {
+      context.commit('showModal', payload)
+    },
+
+    HIDE_MODAL(context) {
+      const onClose = context.state.modal.onClose
+      context.commit('hideModal')
+
+      // Execute onClose callback if provided
+      if (onClose && typeof onClose === 'function') {
+        onClose()
       }
     },
   },

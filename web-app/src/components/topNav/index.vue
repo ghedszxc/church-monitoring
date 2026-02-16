@@ -4,7 +4,7 @@
       <img
         src="/src/assets/images/logo.jpg"
         alt="logo"
-        class="place-self-start lg:place-self-end h-[75%] w-auto cursor-pointer mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:rounded-lg dark:p-1 my-2 ml-7 lg:ml-0"
+        class="place-self-start lg:place-self-end h-[75%] w-auto cursor-pointer mix-blend-multiply dark:mix-blend-normal dark:bg-white dark:rounded-lg p-1 my-2 ml-7 lg:ml-0"
         @click="router.push('/')"
       />
     </div>
@@ -176,9 +176,14 @@ function onRedirect(data) {
     router.push(data.url)
   } else if (data.action == 'logout') {
     localStorage.setItem('isAuthenticated', false)
-    router.push('/login')
-
-    alert('Logged out!')
+    store.dispatch('SHOW_MODAL', {
+      title: 'Success',
+      message: 'Logged out successfully!',
+      type: 'success',
+      onClose: () => {
+        router.push('/login')
+      },
+    })
   }
 }
 </script>

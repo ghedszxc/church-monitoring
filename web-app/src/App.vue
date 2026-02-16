@@ -5,6 +5,42 @@
       <RouterView />
     </div>
     <Footer />
+
+    <!-- Global Modal -->
+    <Modal
+      v-model="store.state.modal.visible"
+      :title="store.state.modal.title"
+      :size="store.state.modal.size"
+      @close="handleModalClose"
+    >
+      <div class="text-center py-4">
+        <i
+          :class="[
+            'text-5xl mb-4',
+            store.state.modal.type === 'success' ? 'pi pi-check-circle text-green-500' :
+            store.state.modal.type === 'error' ? 'pi pi-times-circle text-red-500' :
+            store.state.modal.type === 'warning' ? 'pi pi-exclamation-triangle text-yellow-500' :
+            'pi pi-info-circle text-blue-500'
+          ]"
+        />
+        <p class="text-lg">{{ store.state.modal.message }}</p>
+      </div>
+
+      <template #footer>
+        <button
+          @click="handleModalClose"
+          :class="[
+            'px-6 py-2 rounded-lg font-[500] w-full transition-colors',
+            store.state.modal.type === 'success' ? 'bg-green-500 hover:bg-green-600 text-white' :
+            store.state.modal.type === 'error' ? 'bg-red-500 hover:bg-red-600 text-white' :
+            store.state.modal.type === 'warning' ? 'bg-yellow-500 hover:bg-yellow-600 text-white' :
+            'bg-blue-500 hover:bg-blue-600 text-white'
+          ]"
+        >
+          OK
+        </button>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -14,12 +50,17 @@ import { RouterView, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import TopNav from '@/components/topNav/index.vue'
 import Footer from '@/components/footer/index.vue'
+import Modal from '@/components/modal/index.vue'
 
 const route = useRoute()
 const store = useStore()
 
 function applyTheme(theme) {
   theme === 'dark' ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')
+}
+
+function handleModalClose() {
+  store.dispatch('HIDE_MODAL')
 }
 
 onMounted(async () => {
